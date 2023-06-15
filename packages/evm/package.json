@@ -1,0 +1,26 @@
+{
+  "name": "evm",
+  "version": "0.0.1",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "npm run start:ganache",
+    "start:hardhat": "hardhat node",
+    "start:ganache": "ts-node -r tsconfig-paths/register ./tasks/ganache.ts",
+    "gas": "hardhat gasPrice",
+    "compile": "hardhat compile",
+    "deploy": "hardhat deploy --name",
+    "swap": "hardhat swap --name",
+    "account": "hardhat account"
+  },
+  "devDependencies": {
+    "hardhat": "2.14.0",
+    "@nomiclabs/hardhat-ethers": "2.2.3",
+    "@openzeppelin/contracts": "4.8.3",
+    "ganache": "7.8.0",
+    "ipfs-car": "1.0.0",
+    "nft.storage": "7.0.3",
+    "prettier-plugin-solidity": "1.1.3"
+  },
+  "dependencies": {}
+}

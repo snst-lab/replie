@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "outDir": "./dist",
+    "baseUrl": ".",
+    "paths": {
+      "@constants": ["../@constants/index"],
+      "@abi": ["../evm/@abi/index"],
+      "@tools": ["../@tools/index"],
+      "@tools/runtime": ["../@tools/index.runtime"],
+      "@types": ["../@types/index"],
+      "@includes/*": ["../@includes/*"],
+      "@modules": ["./modules/index"]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.d.ts",
+    "**/*.spec.ts",
+    "hardhat.config.ts",
+    "tasks/**.ts",
+    "modules/**.ts"
+  ],
+  "exclude": ["node_modules"]
+}

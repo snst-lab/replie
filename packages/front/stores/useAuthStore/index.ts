@@ -128,13 +128,15 @@ const useAuthStore = defineStore("auth", {
       if (!user) {
         return null;
       }
+      await $notification().setTooltip("ログインしました");
       return Object.assign(this.user, user);
     },
     async logout(): Promise<void | null> {
       try {
         await this.$reset();
-        await $notification().setTooltip("ログアウトしました");
-        window.location.reload();
+        await $notification().showTooltip("ログアウトしました");
+        navigateTo("/login/");
+        // window.location.reload();
       } catch {
         return null;
       }

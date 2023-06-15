@@ -111,6 +111,9 @@ const onEvent = {
   },
   clickLogout() {
     $auth().logout();
+    if (!Screen.gt.sm) {
+      isDrawerOpen.value = false;
+    }
   },
 };
 </script>

@@ -1,0 +1,7 @@
+schema: ./packages/api/src/schema.gql
+generates:
+  ./packages/@types/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-resolvers

@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "declaration": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@*": ["src/@*"],
+      "@generated/*": ["@generated/prisma-nestjs-graphql/*"],
+      "@constants": ["../@constants/index"],
+      "@tools": ["../@tools/index"],
+      "@tools/runtime": ["../@tools/index.runtime"],
+      "@types": ["../@types/index"],
+      "@includes/*": ["../@includes/*"],
+      "@abi": ["../evm/@abi/index"]
+    }
+  }
+}

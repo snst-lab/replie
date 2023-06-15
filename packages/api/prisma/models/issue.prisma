@@ -1,0 +1,32 @@
+model Issue {
+   /// @Field(() => ID)
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   id                   String  @id @default("")
+   /// @IsUUID("4")
+   userId               String  @default("")
+   /// @Validator.IsNotEmpty()
+   status               String  @default("pending")
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   personId             String  @default("")
+   /// @Validator.IsNotEmpty()
+   personRelationship   String  @default("")
+   /// @Validator.IsNotEmpty()
+   personCharacter      String? @default("")
+   /// @Validator.IsNotEmpty()
+   personRecentStatus   String? @default("")
+   /// @Validator.IsNotEmpty()
+   personRecentIntimacy String? @default("")
+   /// @Validator.IsNotEmpty()
+   requestMessage       String  @default("") @db.Text
+   /// @Validator.IsNotEmpty()
+   requestDirection     String? @default("")
+   /// @Validator.IsNotEmpty()
+   requestLimitLength   Int?    @default(0)
+   /// @Validator.IsNotEmpty()
+   result               String? @default("") @db.Text
+
+   createdAt DateTime @default(now()) @db.Timestamp
+   updatedAt DateTime @default(now()) @db.Timestamp
+}

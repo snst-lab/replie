@@ -1,0 +1,188 @@
+//******** AUTO GENERATED FILE, DO NOT EDIT.  *********
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+generator nestgraphql {
+    provider = "prisma-nestjs-graphql"
+    output   = "../@generated/prisma-nestjs-graphql"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+
+model Issue {
+   /// @Field(() => ID)
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   id                   String  @id @default("")
+   /// @IsUUID("4")
+   userId               String  @default("")
+   /// @Validator.IsNotEmpty()
+   status               String  @default("pending")
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   personId             String  @default("")
+   /// @Validator.IsNotEmpty()
+   personRelationship   String  @default("")
+   /// @Validator.IsNotEmpty()
+   personCharacter      String? @default("")
+   /// @Validator.IsNotEmpty()
+   personRecentStatus   String? @default("")
+   /// @Validator.IsNotEmpty()
+   personRecentIntimacy String? @default("")
+   /// @Validator.IsNotEmpty()
+   requestMessage       String  @default("") @db.Text
+   /// @Validator.IsNotEmpty()
+   requestDirection     String? @default("")
+   /// @Validator.IsNotEmpty()
+   requestLimitLength   Int?    @default(0)
+   /// @Validator.IsNotEmpty()
+   result               String? @default("") @db.Text
+
+   createdAt DateTime @default(now()) @db.Timestamp
+   updatedAt DateTime @default(now()) @db.Timestamp
+}
+
+
+model Notification {
+   /// @Field(() => ID)
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   id       String  @id @default("")
+   /// @IsUUID("4")
+   userId   String  @default("")
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   personId String  @default("")
+   /// @Validator.IsNotEmpty()
+   unread   Boolean @default(true)
+   /// @Validator.IsNotEmpty()
+   title    String  @default("")
+   /// @Validator.IsNotEmpty()
+   message  String? @default("") @db.Text
+   /// @Validator.IsNotEmpty()
+   linkTo   String? @default("")
+
+   createdAt DateTime @default(now()) @db.Timestamp
+   updatedAt DateTime @default(now()) @db.Timestamp
+}
+
+
+model Person {
+   /// @Field(() => ID)
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   id             String  @id @default("")
+   /// @IsUUID("4")
+   userId         String  @default("")
+   /// @Validator.IsNotEmpty()
+   name           String  @default("")
+   /// @Validator.IsNotEmpty()
+   avatar         String? @default("")
+   /// @Validator.IsNotEmpty()
+   relationship   String  @default("")
+   /// @Validator.IsNotEmpty()
+   character      String? @default("")
+   /// @Validator.IsNotEmpty()
+   recentStatus   String? @default("")
+   /// @Validator.IsNotEmpty()
+   recentIntimacy String? @default("")
+
+   createdAt DateTime  @default(now()) @db.Timestamp
+   updatedAt DateTime  @default(now()) @db.Timestamp
+   deletedAt DateTime? @db.Timestamp
+}
+
+
+model QueueMaster {
+    /// @Field(() => ID)
+    id           Int    @id @default(autoincrement())
+    /// @Validator.IsNotEmpty()
+    groupId      Int    @default(1)
+    /// @Validator.IsNotEmpty()
+    /// @ValidateIf((o, v) => v != null && v.length)
+    /// @IsEmail()
+    email        String @default("")
+    /// @Validator.IsNotEmpty()
+    /// @HideField({ input: true, output: true })
+    password     String @default("")
+    /// @Validator.IsNotEmpty()
+    /// @HideField({ input: true, output: true })
+    cookie       Json   @default("{}")
+    /// @Validator.IsNotEmpty()
+    /// @HideField({ input: true, output: true })
+    localStorage Json   @default("{}")
+    /// @Validator.IsNotEmpty()
+    proxyUrl     String @default("")
+    /// @Validator.IsNotEmpty()
+    proxyUser    String @default("")
+    /// @Validator.IsNotEmpty()
+    /// @HideField({ input: true, output: true })
+    proxyPass    String @default("")
+}
+
+
+model User {
+   /// @Field(() => ID)
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   id       String @id @default("")
+   /// @Validator.IsNotEmpty()
+   authType String @default("")
+   /// @Validator.IsNotEmpty()
+   userName String @default("")
+   /// @Validator.IsNotEmpty()
+   /// @HideField({ input: false, output: false })
+   secret   String @default("")
+
+   /// @Validator.IsNotEmpty()
+   /// @ValidateIf((o, v) => v != null && v.length)
+   /// @IsEmail()
+   email     String? @default("")
+   /// @Validator.IsNotEmpty()
+   /// @ValidateIf((o, v) => v != null && v.length)
+   /// IsNumberString()
+   tel       String? @default("")
+   /// @Validator.IsNotEmpty()
+   avatar    String? @default("")
+   /// @Validator.IsNotEmpty()
+   lastName  String? @default("")
+   /// @Validator.IsNotEmpty()
+   firstName String? @default("")
+   /// @Validator.IsNotEmpty()
+   /// @ValidateIf((o, v) => v != null && v.length)
+   /// IsNumberString()
+   zip1      String? @default("")
+   /// @Validator.IsNotEmpty()
+   /// @ValidateIf((o, v) => v != null && v.length)
+   /// IsNumberString()
+   zip2      String? @default("")
+   /// @Validator.IsNotEmpty()
+   address1  String? @default("")
+   /// @Validator.IsNotEmpty()
+   address2  String? @default("")
+   /// @Validator.IsNotEmpty()
+   address3  String? @default("")
+   /// @Validator.IsNotEmpty()
+   address4  String? @default("")
+   /// @Validator.IsNotEmpty()
+   status    String  @default("active")
+   /// @Validator.IsNotEmpty()
+   licence   String  @default("free")
+   /// @Validator.IsNotEmpty()
+   meta      Json    @default("{}")
+
+   lastLoginedAt DateTime? @db.Timestamp
+
+   createdAt DateTime  @default(now()) @db.Timestamp
+   updatedAt DateTime  @default(now()) @db.Timestamp
+   deletedAt DateTime? @db.Timestamp
+}

@@ -1,0 +1,24 @@
+model Person {
+   /// @Field(() => ID)
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   id             String  @id @default("")
+   /// @IsUUID("4")
+   userId         String  @default("")
+   /// @Validator.IsNotEmpty()
+   name           String  @default("")
+   /// @Validator.IsNotEmpty()
+   avatar         String? @default("")
+   /// @Validator.IsNotEmpty()
+   relationship   String  @default("")
+   /// @Validator.IsNotEmpty()
+   character      String? @default("")
+   /// @Validator.IsNotEmpty()
+   recentStatus   String? @default("")
+   /// @Validator.IsNotEmpty()
+   recentIntimacy String? @default("")
+
+   createdAt DateTime  @default(now()) @db.Timestamp
+   updatedAt DateTime  @default(now()) @db.Timestamp
+   deletedAt DateTime? @db.Timestamp
+}

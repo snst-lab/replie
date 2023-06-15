@@ -1,0 +1,22 @@
+model Notification {
+   /// @Field(() => ID)
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   id       String  @id @default("")
+   /// @IsUUID("4")
+   userId   String  @default("")
+   /// @Validator.IsNotEmpty()
+   /// @IsUUID("4")
+   personId String  @default("")
+   /// @Validator.IsNotEmpty()
+   unread   Boolean @default(true)
+   /// @Validator.IsNotEmpty()
+   title    String  @default("")
+   /// @Validator.IsNotEmpty()
+   message  String? @default("") @db.Text
+   /// @Validator.IsNotEmpty()
+   linkTo   String? @default("")
+
+   createdAt DateTime @default(now()) @db.Timestamp
+   updatedAt DateTime @default(now()) @db.Timestamp
+}

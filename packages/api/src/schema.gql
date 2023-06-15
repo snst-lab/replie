@@ -1,0 +1,379 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input IssueCreateInput {
+  createdAt: DateTime
+  id: String
+  personCharacter: String
+  personId: String
+  personRecentIntimacy: String
+  personRecentStatus: String
+  personRelationship: String
+  requestDirection: String
+  requestLimitLength: Int
+  requestMessage: String
+  result: String
+  status: String
+  updatedAt: DateTime
+  userId: String
+}
+
+input IssueOrderByWithRelationInput {
+  createdAt: SortOrder
+  id: SortOrder
+  personCharacter: SortOrder
+  personId: SortOrder
+  personRecentIntimacy: SortOrder
+  personRecentStatus: SortOrder
+  personRelationship: SortOrder
+  requestDirection: SortOrder
+  requestLimitLength: SortOrder
+  requestMessage: SortOrder
+  result: SortOrder
+  status: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+enum IssueScalarFieldEnum {
+  createdAt
+  id
+  personCharacter
+  personId
+  personRecentIntimacy
+  personRecentStatus
+  personRelationship
+  requestDirection
+  requestLimitLength
+  requestMessage
+  result
+  status
+  updatedAt
+  userId
+}
+
+input IssueWhereInput {
+  AND: [IssueWhereInput!]
+  NOT: [IssueWhereInput!]
+  OR: [IssueWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  personCharacter: StringNullableFilter
+  personId: StringFilter
+  personRecentIntimacy: StringNullableFilter
+  personRecentStatus: StringNullableFilter
+  personRelationship: StringFilter
+  requestDirection: StringNullableFilter
+  requestLimitLength: IntNullableFilter
+  requestMessage: StringFilter
+  result: StringNullableFilter
+  status: StringFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
+input IssueWhereUniqueInput {
+  id: String
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type Mutation {
+  """."""
+  createIssue(data: IssueCreateInput!): Response!
+
+  """."""
+  login(authType: String!, secret: String, userName: String!): Response!
+
+  """."""
+  readNotification(data: NotificationCreateInput!): Response!
+
+  """."""
+  upsertPerson(data: PersonCreateInput!): Response!
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeNullableFilter
+  notIn: [DateTime!]
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: NestedIntNullableFilter
+  notIn: [Int!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NestedStringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input NotificationCreateInput {
+  createdAt: DateTime
+  id: String
+  linkTo: String
+  message: String
+  personId: String
+  title: String
+  unread: Boolean
+  updatedAt: DateTime
+  userId: String
+}
+
+input NotificationOrderByWithRelationInput {
+  createdAt: SortOrder
+  id: SortOrder
+  linkTo: SortOrder
+  message: SortOrder
+  personId: SortOrder
+  title: SortOrder
+  unread: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+enum NotificationScalarFieldEnum {
+  createdAt
+  id
+  linkTo
+  message
+  personId
+  title
+  unread
+  updatedAt
+  userId
+}
+
+input NotificationWhereInput {
+  AND: [NotificationWhereInput!]
+  NOT: [NotificationWhereInput!]
+  OR: [NotificationWhereInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  linkTo: StringNullableFilter
+  message: StringNullableFilter
+  personId: StringFilter
+  title: StringFilter
+  unread: BoolFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
+input NotificationWhereUniqueInput {
+  id: String
+}
+
+input PersonCreateInput {
+  avatar: String
+  character: String
+  createdAt: DateTime
+  deletedAt: DateTime
+  id: String
+  name: String
+  recentIntimacy: String
+  recentStatus: String
+  relationship: String
+  updatedAt: DateTime
+  userId: String
+}
+
+input PersonOrderByWithRelationInput {
+  avatar: SortOrder
+  character: SortOrder
+  createdAt: SortOrder
+  deletedAt: SortOrder
+  id: SortOrder
+  name: SortOrder
+  recentIntimacy: SortOrder
+  recentStatus: SortOrder
+  relationship: SortOrder
+  updatedAt: SortOrder
+  userId: SortOrder
+}
+
+enum PersonScalarFieldEnum {
+  avatar
+  character
+  createdAt
+  deletedAt
+  id
+  name
+  recentIntimacy
+  recentStatus
+  relationship
+  updatedAt
+  userId
+}
+
+input PersonWhereInput {
+  AND: [PersonWhereInput!]
+  NOT: [PersonWhereInput!]
+  OR: [PersonWhereInput!]
+  avatar: StringNullableFilter
+  character: StringNullableFilter
+  createdAt: DateTimeFilter
+  deletedAt: DateTimeNullableFilter
+  id: StringFilter
+  name: StringFilter
+  recentIntimacy: StringNullableFilter
+  recentStatus: StringNullableFilter
+  relationship: StringFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
+input PersonWhereUniqueInput {
+  id: String
+}
+
+type Query {
+  """."""
+  findIssue(cursor: IssueWhereUniqueInput, distinct: [IssueScalarFieldEnum!], orderBy: [IssueOrderByWithRelationInput!], skip: Int, take: Int, where: IssueWhereInput): Response!
+
+  """."""
+  findManyIssue(cursor: IssueWhereUniqueInput, distinct: [IssueScalarFieldEnum!], orderBy: [IssueOrderByWithRelationInput!], skip: Int, take: Int, where: IssueWhereInput): Response!
+
+  """."""
+  findManyNotification(cursor: NotificationWhereUniqueInput, distinct: [NotificationScalarFieldEnum!], orderBy: [NotificationOrderByWithRelationInput!], skip: Int, take: Int, where: NotificationWhereInput): Response!
+
+  """."""
+  findManyPerson: Response!
+
+  """."""
+  findPerson(cursor: PersonWhereUniqueInput, distinct: [PersonScalarFieldEnum!], orderBy: [PersonOrderByWithRelationInput!], skip: Int, take: Int, where: PersonWhereInput): Response!
+}
+
+type Response {
+  jwt: JSON
+  response: JSON
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringNullableFilter
+  notIn: [String!]
+  startsWith: String
+}

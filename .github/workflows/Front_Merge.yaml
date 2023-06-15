@@ -1,0 +1,25 @@
+name: Front Build Check
+
+on:
+  push:
+    path:
+      - "packages/front/*"
+      - "yarn.lock"
+    branches: [develop]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.14.2]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install
+      - run: yarn workspace front generate

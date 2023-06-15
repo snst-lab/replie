@@ -1,0 +1,63 @@
+$space-base: 16px;
+$space-x-base: $space-base;
+$space-y-base: $space-base;
+
+$space-none: (
+  x: 0,
+  y: 0,
+);
+$space-xs: (
+  x: (
+    $space-x-base * 0.25,
+  ),
+  y: (
+    $space-y-base * 0.25,
+  ),
+);
+$space-sm: (
+  x: (
+    $space-x-base * 0.5,
+  ),
+  y: (
+    $space-y-base * 0.5,
+  ),
+);
+$space-md: (
+  x: $space-x-base,
+  y: $space-y-base,
+);
+$space-lg: (
+  x: (
+    $space-x-base * 1.5,
+  ),
+  y: (
+    $space-y-base * 1.5,
+  ),
+);
+$space-xl: (
+  x: (
+    $space-x-base * 3,
+  ),
+  y: (
+    $space-y-base * 3,
+  ),
+);
+
+// sorry for long line; we need .sass and it doesn't support multi-line list
+$spaces: (
+  "none": $space-none,
+  "xs": $space-xs,
+  "sm": $space-sm,
+  "md": $space-md,
+  "lg": $space-lg,
+  "xl": $space-xl,
+);
+
+:export {
+  spaceBase: $space-base;
+  spaceXs: map-get($space-xs, x);
+  spaceSm: map-get($space-sm, x);
+  spaceMd: map-get($space-md, x);
+  spaceLg: map-get($space-lg, x);
+  spaceXl: map-get($space-xl, x);
+}

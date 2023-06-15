@@ -1,0 +1,28 @@
+{
+  "name": "front",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "dev:ssl": "nuxt dev --https --ssl-cert ../../certificate/localhost.pem --ssl-key ../../certificate/localhost-key.pem",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "npm:@nuxt/devtools-edge@latest",
+    "@quasar/extras": "1.16.4",
+    "sass": "1.62.1",
+    "vue": "3.2.47"
+  },
+  "dependencies": {
+    "@pinia/nuxt": "0.4.9",
+    "@types/js-cookie": "3.0.3",
+    "ethereum-blockies": "0.1.1",
+    "js-cookie": "3.0.5",
+    "json-to-graphql-query": "2.2.5",
+    "nuxt": "3.4.3",
+    "pinia": "2.0.35",
+    "quasar": "2.12.0"
+  }
+}

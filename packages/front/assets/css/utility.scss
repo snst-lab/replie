@@ -1,0 +1,33 @@
+@import "mixin";
+@import "quasar";
+
+.u-desktop {
+  @include mobile {
+    display: none;
+  }
+  @include tablet {
+    display: none;
+  }
+}
+.u-tablet {
+  @include mobile {
+    display: none;
+  }
+  @include desktop {
+    display: none;
+  }
+}
+.u-mobile {
+  @include tablet {
+    display: none;
+  }
+  @include desktop {
+    display: none;
+  }
+}
+
+@for $i from 1 through 10 {
+  .u-clamp-#{$i} {
+    @include clamp($i);
+  }
+}

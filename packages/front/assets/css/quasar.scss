@@ -1,0 +1,64 @@
+@import "assets/css";
+
+.q-header {
+  background-color: white;
+  color: $grey-10;
+  border-bottom: 1px solid $grey-3;
+  min-height: 50px;
+
+  .body--dark & {
+    background-color: $dark;
+    color: white;
+  }
+}
+
+.q-toolbar {
+  &__title {
+    font-weight: $font-weight;
+  }
+}
+
+.q-page-container {
+  background-color: $grey-2;
+
+  .body--dark & {
+    background-color: $grey-10;
+  }
+}
+
+.q-card {
+  background-color: white;
+
+  .body--dark & {
+    background-color: black;
+  }
+}
+
+// .q-layout-container {
+//   height: 100vh;
+// }
+
+.q-carousel {
+  background-color: transparent;
+  .q-carousel__slide {
+    padding: 0;
+  }
+}
+
+.q-loading__backdrop {
+  opacity: 0 !important;
+}
+
+#tooltip--header-notification {
+  position: relative;
+  overflow: visible;
+
+  &::before {
+    font-size: 20px;
+    content: "▲";
+    color: $amber;
+    position: absolute;
+    top: -18px;
+    right: 20px;
+  }
+}

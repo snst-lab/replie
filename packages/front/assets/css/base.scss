@@ -1,0 +1,103 @@
+@import "color";
+@import "font";
+@import "space";
+@import "media";
+@import "mixin";
+
+body,
+header,
+footer,
+main,
+nav {
+  font-family: $font-family;
+  font-weight: $font-weight;
+}
+
+main {
+  opacity: 0;
+  // transition: opacity 0.2s ease-out;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    filter: brightness(1.05);
+  }
+  display: inline-block;
+}
+
+em {
+  font-size: 14px;
+  font-weight: bold;
+  font-style: normal;
+  color: $grey-9;
+
+  .body--dark & {
+    color: white;
+  }
+}
+
+p {
+  font-size: 14px;
+  color: $grey-10;
+
+  .body--dark & {
+    color: white;
+  }
+}
+
+label {
+  color: $grey-8;
+  text-indent: 4px;
+  font-size: 13px;
+  font-weight: normal;
+  letter-spacing: 1px;
+
+  .body--dark & {
+    color: #fafafa;
+  }
+}
+
+small {
+  font-size: 11px;
+  color: $grey-8;
+
+  vertical-align: baseline;
+  .body--dark & {
+    color: #fafafa;
+  }
+}
+
+em,
+p,
+label small {
+  display: inline-block;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+li {
+  list-style: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: $grey-8;
+  border-radius: 6px;
+  box-shadow: none;
+}

@@ -1,0 +1,31 @@
+$font-family: "LINE Seed", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ ProN W3",
+  "ヒラギノ角ゴシック", "Hiragino Sans", "メイリオ", Meiryo, "ＭＳ ゴシック",
+  sans-serif;
+$font-weight: 400;
+$font-weight-bold: 700;
+
+@font-face {
+  font-family: "LINE Seed";
+  font-weight: 700;
+  font-style: normal;
+  src: url("~/assets/fonts/LINESeedJP_OTF_Bd.woff2") format("woff2"),
+    url("~/assets/fonts/LINESeedJP_OTF_Bd.woff") format("woff"),
+    url("~/assets/fonts/LINESeedJP_TTF_Bd.eot") format("embedded-opentype");
+}
+@font-face {
+  font-family: "LINE Seed";
+  font-weight: 400;
+  font-style: normal;
+  src: url("~/assets/fonts/LINESeedJP_OTF_Th.woff2") format("woff2"),
+    url("~/assets/fonts/LINESeedJP_OTF_Th.woff") format("woff"),
+    url("~/assets/fonts/LINESeedJP_TTF_Th.eot") format("embedded-opentype");
+}
+
+$font-list: (
+  jp: "LINE Seed",
+  en: "Roboto",
+);
+
+@function font($arg: "jp") {
+  @return map-get($font-list, $arg);
+}

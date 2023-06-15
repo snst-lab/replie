@@ -1,0 +1,22 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch",
+      "port": 4000,
+      "runtimeExecutable": "yarn",
+      "runtimeArgs": [
+        "workspace",
+        "api",
+        "nest",
+        "start",
+        "--debug",
+        "--watch"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ]
+}

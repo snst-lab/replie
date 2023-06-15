@@ -17,7 +17,6 @@ export class AuthGuard extends BaseGuard {
 
   async handleRequest(context: ExecutionContext): Promise<Auth.GuardResponse> {
     try {
-      this.error.throw('unknown');
       const ctx = GqlExecutionContext.create(context).getContext();
       const auth: Auth.Variables = ctx.req.body.variables.auth;
       if (!auth) {

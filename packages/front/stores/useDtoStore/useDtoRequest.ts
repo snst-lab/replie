@@ -11,7 +11,7 @@ export const useDtoRequestStore = defineStore("dtoRequest", {
   state: () => ({ value: {} as Record<Dto.Id, Dto.Request> }),
   persist: {
     enabled: true,
-    lifetime: "session",
+    lifetime: "long",
     scope: "global",
   },
   getters: {
@@ -52,7 +52,7 @@ export const useDtoRequestStore = defineStore("dtoRequest", {
         direction: requestDirection,
         limitLength: requestLimitLength,
       } = this.value[personId];
-      const response = (await useMutation("createIssue", {
+      await useMutation("createIssue", {
         data: {
           id: "create",
           personId,
@@ -64,7 +64,7 @@ export const useDtoRequestStore = defineStore("dtoRequest", {
           requestDirection,
           requestLimitLength,
         },
-      })) as Dto.Issue;
+      });
     },
   },
 });

@@ -15,7 +15,7 @@ export const useDtoPersonStore = defineStore("dtoPerson", {
   state: () => ({ value: {} as Record<Dto.Id, Dto.Person> }),
   persist: {
     enabled: true,
-    lifetime: "session",
+    lifetime: "long",
     scope: "global",
   },
   getters: {

@@ -21,23 +21,17 @@ export function useAuthGoogle(): AuthStore {
   }
 
   function start() {
-    useHead({
-      script: [
-        {
-          src: "https://accounts.google.com/gsi/client",
-          async: false,
-          defer: false,
-        },
-      ],
-    });
     $loading().show();
-    const interval = setInterval(() => {
-      if (typeof google !== "undefined") {
-        clearInterval(interval);
+    tools.wait(
+      typeof google !== "undefined",
+      () => {
         requestCode();
+      },
+      () => {
+        navigateTo("/login/");
         $loading().hide();
       }
-    }, 500);
+    );
   }
 
   async function fetchSocialToken() {

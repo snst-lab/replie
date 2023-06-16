@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { $auth } from "@stores";
 definePageMeta({ layout: "dashboard" });
 </script>
 

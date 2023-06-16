@@ -5,7 +5,11 @@ definePageMeta({
   layout: "dashboard",
 });
 
-onMounted(async () => {});
+const history = ref<Dto.Notification[]>([]);
+
+onMounted(async () => {
+  history.value = await $notification().fetchNew();
+});
 
 const onEvent = {
   scrollDown: async (index: number, done: () => void) => {
@@ -24,24 +28,17 @@ const onEvent = {
 <template>
   <div class="q-pb-xl">
     <TextTitle center>通知一覧</TextTitle>
-    <template v-if="$notification().history.length">
+    <template v-if="history.length">
       <q-infinite-scroll
         @load="onEvent.scrollDown"
         :offset="250"
         scroll-target="body"
       >
         <template #default>
-          <CardNotification
-            v-for="(v, i) in $notification().history"
-            :index="i"
-            :data="v"
-          />
+          <CardNotification v-for="(v, i) in history" :index="i" :data="v" />
         </template>
         <template #loading>
-          <div
-            class="row justify-center q-my-md"
-            v-if="$notification().history.length >= 5"
-          >
+          <div class="row justify-center q-my-md" v-if="history.length >= 5">
             <q-spinner-dots color="primary" size="40px" />
           </div>
         </template>

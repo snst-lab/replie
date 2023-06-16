@@ -22,6 +22,7 @@ export class NotificationResolver {
     try {
       const response = await this.prisma.notification.findMany({
         ...args,
+        where: { AND: [{ userId: user.id }, args.where] },
         take: 5,
         orderBy: { createdAt: 'desc' },
       });

@@ -68,6 +68,7 @@ const onEvent = {
 <style lang="scss" scoped>
 @import "assets/css";
 .c-card-notification {
+  height: 20vh;
   cursor: pointer;
   transition: 0.2s;
   background-color: white;

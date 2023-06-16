@@ -129,14 +129,14 @@ const useAuthStore = defineStore("auth", {
         return null;
       }
       await $notification().setTooltip("ログインしました");
+      await $notification().clearAll();
       return Object.assign(this.user, user);
     },
     async logout(): Promise<void | null> {
       try {
         await this.$reset();
+        await useRouter().replace("/login/");
         await $notification().showTooltip("ログアウトしました");
-        navigateTo("/login/");
-        // window.location.reload();
       } catch {
         return null;
       }
@@ -152,10 +152,10 @@ const useAuthStore = defineStore("auth", {
     },
     restoreUrl() {
       if (this.url) {
-        window.location.href = this.url;
+        useRouter().replace(this.url);
         this.url = "";
       } else {
-        window.location.href = "/";
+        useRouter().replace("/");
       }
     },
   },

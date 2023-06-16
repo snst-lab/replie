@@ -12,7 +12,7 @@ onMounted(async () => {
       await $auth().fetchSocialToken();
       await $auth().login();
       await $auth().restoreUrl();
-      await $notification().setTooltip("ログインしました");
+      await $notification().showTooltip("ログインしました");
     }
   } catch {
     isButtonShow.value = true;

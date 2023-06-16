@@ -12,7 +12,7 @@ const useNotificationStore = defineStore("notification", {
   }),
   persist: {
     enabled: true,
-    lifetime: "session",
+    lifetime: "long",
     scope: "global",
   },
   getters: {
@@ -77,7 +77,7 @@ const useNotificationStore = defineStore("notification", {
       if (response.length > 0) {
         await this.unshiftHistory(response);
         if (this.unreadCount > 0) {
-          await tools.sleep(1000);
+          await tools.sleep(500);
           await this.showTooltip(`${this.unreadCount} 件の未読通知があります`);
         }
       }
@@ -90,11 +90,10 @@ const useNotificationStore = defineStore("notification", {
       const response = (await useQuery("findManyNotification", {
         where: { createdAt: { lt: this.oldestTimestamp } },
       })) as Dto.Notification[];
-
       if (response.length > 0) {
         await this.pushHistory(response);
       } else {
-        window.scrollBy({ top: -100, behavior: "smooth" });
+        window.scrollBy({ top: -0.2 * window.innerHeight, behavior: "smooth" });
       }
       return [...this.history];
     },

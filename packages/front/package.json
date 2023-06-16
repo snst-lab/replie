@@ -9,20 +9,18 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
-  "devDependencies": {
-    "@nuxt/devtools": "npm:@nuxt/devtools-edge@latest",
-    "@quasar/extras": "1.16.4",
-    "sass": "1.62.1",
-    "vue": "3.2.47"
-  },
   "dependencies": {
-    "@pinia/nuxt": "0.4.9",
+    "@nuxt/devtools": "npm:@nuxt/devtools-edge@latest",
+    "@pinia/nuxt": "0.4.11",
+    "@quasar/extras": "1.16.4",
     "@types/js-cookie": "3.0.3",
     "ethereum-blockies": "0.1.1",
     "js-cookie": "3.0.5",
     "json-to-graphql-query": "2.2.5",
-    "nuxt": "3.4.3",
-    "pinia": "2.0.35",
-    "quasar": "2.12.0"
+    "nuxt": "3.5.3",
+    "pinia": "2.1.4",
+    "quasar": "2.12.0",
+    "sass": "1.63.4",
+    "vue": "3.3.4"
   }
 }

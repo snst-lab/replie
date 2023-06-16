@@ -1,11 +1,10 @@
 import {
   Injectable,
   Inject,
-  CacheStore,
   OnModuleInit,
   OnModuleDestroy,
 } from '@nestjs/common';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { CACHE_MANAGER, CacheStore } from '@nestjs/cache-manager';
 import { ClientKafka } from '@nestjs/microservices';
 import { InjectQueue, OnGlobalQueueCompleted } from '@nestjs/bull';
 import { Queue } from 'bull';

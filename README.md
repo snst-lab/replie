@@ -1,6 +1,6 @@
 # replie
 
-This is a yarn workspace for web3 projects
+This is an AI-based communication support tool
 
 <br>
 

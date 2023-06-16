@@ -162,13 +162,13 @@ function redirect(
     case false:
       break;
     case "#error":
-      router.push(`/error/?code=${code}`);
+      router.replace(`/error/?code=${code}`);
       break;
     case "#back":
       router.back();
       break;
     default:
-      router.push(redirectTo);
+      router.replace(redirectTo);
       break;
   }
 }

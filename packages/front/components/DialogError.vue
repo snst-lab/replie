@@ -4,7 +4,7 @@ import { $dialog } from "@stores";
 const onHide =
   $dialog().args.error?.onHide ??
   (() => {
-    $dialog().args.error = undefined;
+    $dialog().args.error = {};
   });
 </script>
 

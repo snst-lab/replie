@@ -93,7 +93,12 @@ const useNotificationStore = defineStore("notification", {
       if (response.length > 0) {
         await this.pushHistory(response);
       } else {
-        window.scrollBy({ top: -0.2 * window.innerHeight, behavior: "smooth" });
+        const { public: constants } = useRuntimeConfig();
+        const { notificationsPerPage } = constants.number;
+        window.scrollBy({
+          top: -(1 / notificationsPerPage) * window.innerHeight,
+          behavior: "smooth",
+        });
       }
       return [...this.history];
     },

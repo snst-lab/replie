@@ -8,6 +8,9 @@ const props = defineProps<{
 
 const router = useRouter();
 
+const { public: constants } = useRuntimeConfig();
+const notificationsPerPage = constants.number.notificationsPerPage as number;
+
 const randomSeed = props.data.personId ?? dayjs().unix().toString();
 
 const onEvent = {
@@ -58,21 +61,28 @@ const onEvent = {
           </div>
         </div>
       </div>
-      <div class="col-1">
-        <q-icon color="grey" size="24px" name="chevron_right" class="block" />
-      </div>
+      <q-icon color="grey" size="24px" name="chevron_right" class="block" />
     </div>
   </div>
 </template>
 
+<style scoped>
+.c-card-notification {
+  --height: v-bind(100 / notificationsPerPage + "vh");
+}
+</style>
+
 <style lang="scss" scoped>
 @import "assets/css";
 .c-card-notification {
-  height: 20vh;
   cursor: pointer;
-  transition: 0.2s;
-  background-color: white;
+  height: var(--height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border: 1px solid $grey-4;
+  background-color: white;
+  transition: background-color 0.2s;
   .body--dark & {
     background-color: $grey-10;
     border: 1px solid $grey-8;

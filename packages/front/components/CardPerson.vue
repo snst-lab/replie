@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { is } from "quasar";
-
 const props = defineProps<{
   id: string;
   name: string;
@@ -9,6 +7,9 @@ const props = defineProps<{
   icon?: string;
   canDelete?: boolean;
 }>();
+
+const { public: constants } = useRuntimeConfig();
+const personsPerPage = constants.number.personsPerPage as number;
 
 const onEvent = {
   swipeLeft: (event: Json) => {
@@ -62,12 +63,22 @@ const onEvent = {
   </div>
 </template>
 
+<style scoped>
+.c-card-person {
+  --height: v-bind(100 / personsPerPage + "vh");
+}
+</style>
+
 <style lang="scss" scoped>
 @import "assets/css";
 .c-card-person {
-  cursor: pointer;
   position: relative;
-  height: 82px;
+  cursor: pointer;
+  height: var(--height);
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   &__foreground {
     height: inherit;

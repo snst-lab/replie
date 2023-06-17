@@ -16,7 +16,6 @@ import { config } from './config';
   imports: [
     // ClientsModule.register([config.kafka])
     BullModule.forRoot({
-      ...config.bull,
       redis: config.cache,
     }),
     BullModule.registerQueue({

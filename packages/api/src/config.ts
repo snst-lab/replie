@@ -66,11 +66,6 @@ export const config = {
       },
     },
   } as ClientProviderOptions,
-  bull: {
-    defaultJobOptions: {
-      timeout: 10 * 60 * 1000,
-    },
-  },
   graphql: {
     driver: MercuriusDriver,
     graphiql: process.env.NODE_ENV !== 'production',

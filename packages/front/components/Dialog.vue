@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { QDialogProps } from "quasar";
+import { QDialogProps, Screen } from "quasar";
 import { $dialog } from "@stores";
 
 const props = defineProps<{
@@ -18,9 +18,6 @@ const props = defineProps<{
   }[];
 }>();
 
-// const width = ref<number>(props.width ?? 320);
-const width = ref<number>(props.width ?? 960);
-const padding = props.padding ?? 20;
 const buttons = ref<
   {
     label: string;
@@ -33,7 +30,13 @@ const buttons = ref<
 const hasButton = computed(() => {
   return buttons.value.length > 0;
 });
-const position = ref<QDialogProps["position"]>("bottom");
+const width = computed<number>(() => {
+  return props.width ? props.width : Screen.gt.sm ? 480 : 960;
+});
+const padding = props.padding ?? 20;
+const position = computed<QDialogProps["position"]>(() => {
+  return Screen.gt.sm ? "standard" : "bottom";
+});
 
 // function watchEventChangeUrl(callback: Function) {
 //   callback();

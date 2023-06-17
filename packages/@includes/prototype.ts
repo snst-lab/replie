@@ -12,7 +12,7 @@ Object.defineProperty(Observable.prototype, "unwrap", {
   writable: false,
   value: async function () {
     let response = {};
-    await this.forEach(async (value) => {
+    await this.forEach(async (value: any) => {
       response = await value;
     });
     return response;

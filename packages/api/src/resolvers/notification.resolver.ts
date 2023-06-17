@@ -5,6 +5,9 @@ import { AuthGuard, GuardResponse } from '@/guards';
 import { Response } from '@/types';
 import { FindManyNotificationArgs } from '@generated/notification/find-many-notification.args';
 import { CreateOneNotificationArgs } from '@generated/notification/create-one-notification.args';
+import { constants } from '@constants';
+
+const { notificationsPerPage } = constants.number;
 
 @Resolver()
 export class NotificationResolver {
@@ -23,7 +26,7 @@ export class NotificationResolver {
       const response = await this.prisma.notification.findMany({
         ...args,
         where: { AND: [{ userId: user.id }, args.where] },
-        take: 5,
+        take: notificationsPerPage,
         orderBy: { createdAt: 'desc' },
       });
       return { response, jwt };

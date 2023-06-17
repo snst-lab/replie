@@ -6,6 +6,9 @@ import { Response } from '@/types';
 import { CreateOnePersonArgs } from '@generated/person/create-one-person.args';
 import { FindFirstPersonArgs } from '@generated/person/find-first-person.args';
 import { tools } from '@tools';
+import { constants } from '@constants';
+
+const { personsPerPage } = constants.number;
 
 @Resolver()
 export class PersonResolver {
@@ -42,6 +45,7 @@ export class PersonResolver {
     try {
       const response = await this.prisma.person.findMany({
         where: { userId: user.id },
+        // TODO: pagination
       });
       return { response, jwt };
     } catch (error) {

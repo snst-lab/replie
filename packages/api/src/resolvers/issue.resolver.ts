@@ -12,6 +12,9 @@ import { tools } from '@tools';
 import { FindFirstIssueArgs } from '@generated/issue/find-first-issue.args';
 import { CreateOneIssueArgs } from '@generated/issue/create-one-issue.args';
 import { FindManyIssueArgs } from '@generated/issue/find-many-issue.args';
+import { constants } from '@constants';
+
+const { issuesPerPage } = constants.number;
 
 @Resolver()
 export class IssueResolver {
@@ -53,7 +56,7 @@ export class IssueResolver {
     try {
       const response = await this.prisma.issue.findMany({
         where: { userId: user.id },
-        take: 5,
+        take: issuesPerPage,
         skip: args?.skip ?? 0,
         orderBy: { updatedAt: 'desc' },
       });

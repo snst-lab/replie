@@ -1,13 +1,15 @@
 import evm from "./evm";
 import vendor from "./vendor";
 import error from "./error";
-import mapper from "./mapper";
+import number from "./number";
 import url from "./url";
+import mapper from "./mapper";
 
 export const constants = {
-  error,
-  mapper,
-  url,
   evm,
   vendor,
+  error,
+  number,
+  url,
+  mapper,
 };

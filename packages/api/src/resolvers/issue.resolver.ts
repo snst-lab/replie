@@ -10,8 +10,9 @@ import { AuthGuard, GuardResponse } from '@/guards';
 import { Response } from '@/types';
 import { tools } from '@tools';
 import { FindFirstIssueArgs } from '@generated/issue/find-first-issue.args';
-import { CreateOneIssueArgs } from '@generated/issue/create-one-issue.args';
 import { FindManyIssueArgs } from '@generated/issue/find-many-issue.args';
+import { CreateOneIssueArgs } from '@generated/issue/create-one-issue.args';
+import { DeleteOneIssueArgs } from '@generated/issue/delete-one-issue.args';
 import { constants } from '@constants';
 
 const { issuesPerPage } = constants.number;
@@ -33,7 +34,7 @@ export class IssueResolver {
   ) {
     try {
       if (!args.where?.id) {
-        this.error.throw('bad-request');
+        this.error.throw('invalid-parameter');
       }
       const response = await this.prisma.issue.findFirst({
         where: { AND: [{ userId: user.id }, { id: args.where.id }] },
@@ -74,14 +75,14 @@ export class IssueResolver {
   ) {
     try {
       if (!args.data?.id) {
-        this.error.throw('bad-request');
+        this.error.throw('invalid-parameter');
       }
       let response = {} as Json;
       if (args.data.id === 'create') {
-        args.data.id = tools.random.guid();
         response = await this.prisma.issue.create({
           data: {
             ...args.data,
+            id: tools.random.guid(),
             userId: user.id,
           },
         });
@@ -131,9 +132,9 @@ export class IssueResolver {
               data: {
                 id: tools.random.guid(),
                 userId: user.id,
-                personId: args.data.personId,
+                personId: response.personId,
                 title: '新しいアドバイスが届きました',
-                message: `次のメッセージへの返事をアドバイスします「${args.data.requestMessage}」`,
+                message: `次のメッセージへの返事をアドバイスします「${response.requestMessage}」`,
                 linkTo: `/issues/${response.id}`,
               },
             });
@@ -149,9 +150,9 @@ export class IssueResolver {
               data: {
                 id: tools.random.guid(),
                 userId: user.id,
-                personId: args.data.personId,
+                personId: response.personId,
                 title: 'アドバイスの作成に失敗しました',
-                message: `次のメッセージへのアドバイスの作成に失敗しました。リトライしてみてください。「${args.data.requestMessage}」`,
+                message: `次のメッセージへのアドバイスの作成に失敗しました。リトライしてみてください。「${response.requestMessage}」`,
                 linkTo: `/issues/${response.id}`,
               },
             });
@@ -159,6 +160,31 @@ export class IssueResolver {
         },
       );
       return { response, jwt };
+    } catch (error) {
+      this.error.catch(error);
+    }
+  }
+
+  @Mutation(() => Response, { description: '.' })
+  @UseGuards(AuthGuard)
+  async deleteIssue(
+    @Args() args: DeleteOneIssueArgs,
+    @GuardResponse() { user, jwt }: Auth.GuardResponse,
+  ) {
+    try {
+      if (!args.where?.id) {
+        this.error.throw('invalid-parameter');
+      }
+      const response = await this.prisma.issue.findFirst({
+        where: { AND: [{ userId: user.id }, { id: args.where.id }] },
+      });
+      if (!response?.id) {
+        this.error.throw('not-found-issue');
+      }
+      await this.prisma.issue.delete({
+        where: { id: args.where.id },
+      });
+      return { response: true, jwt };
     } catch (error) {
       this.error.catch(error);
     }

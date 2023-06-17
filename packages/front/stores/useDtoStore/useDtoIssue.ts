@@ -57,15 +57,24 @@ export const useDtoIssueStore = defineStore("dtoIssue", {
       return this.set(response.id, response ?? primitive);
     },
     async resend(issueId: Dto.Id) {
-      await useMutation("upsertIssue", {
+      const response = (await useMutation("upsertIssue", {
         data: {
           id: issueId,
         },
-      });
-      this.set(issueId, { status: "pending" });
+      })) as Dto.Issue;
+      if (response?.id) {
+        this.set(issueId, { status: "pending" });
+      }
     },
     async delete(issueId: Dto.Id) {
-      await useMutation("deleteIssue", {});
+      const response = (await useMutation("deleteIssue", {
+        where: {
+          id: issueId,
+        },
+      })) as boolean;
+      if (response) {
+        this.clear(issueId);
+      }
     },
   },
 });

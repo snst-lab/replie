@@ -43,7 +43,7 @@ export class NotificationResolver {
   ) {
     try {
       if (!args.data?.id) {
-        this.error.throw('bad-request');
+        this.error.throw('invalid-parameter');
       }
       const response = await this.prisma.notification.update({
         where: { id: args.data.id },

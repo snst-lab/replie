@@ -32,7 +32,6 @@ const onEvent = {
       action: async () => {
         $loading().show(false);
         await $dto().issue.delete(issueId.value);
-        $notification().pollingStart();
         $dialog().hide("confirm");
         $dialog().show("complete", {
           title: "削除完了",

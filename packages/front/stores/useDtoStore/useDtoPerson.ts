@@ -30,9 +30,9 @@ export const useDtoPersonStore = defineStore("dtoPerson", {
       }
       return { ...this.value[personId] };
     },
-    set(personId: Dto.Id, person: Dto.Person) {
-      this.value[personId] = person;
-      $dto().personList.setOne(personId, person);
+    set(personId: Dto.Id, person: Partial<Dto.Person>) {
+      this.value[personId] = { ...this.value[personId], ...person };
+      $dto().personList.setOne(personId, this.value[personId]);
       return { ...this.value[personId] };
     },
     clear(personId: Dto.Id) {

@@ -26,8 +26,8 @@ export const useDtoRequestStore = defineStore("dtoRequest", {
       }
       return { ...this.value[personId] };
     },
-    set(personId: Dto.Id, request: Dto.Request) {
-      this.value[personId] = request;
+    set(personId: Dto.Id, request: Partial<Dto.Request>) {
+      this.value[personId] = { ...this.value[personId], ...request };
       return { ...this.value[personId] };
     },
     clear(personId: Dto.Id) {
@@ -52,7 +52,7 @@ export const useDtoRequestStore = defineStore("dtoRequest", {
         direction: requestDirection,
         limitLength: requestLimitLength,
       } = this.value[personId];
-      await useMutation("createIssue", {
+      await useMutation("upsertIssue", {
         data: {
           id: "create",
           personId,

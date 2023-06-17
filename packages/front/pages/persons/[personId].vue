@@ -63,9 +63,8 @@ watch(
 
 const onEvent = {
   clickNext: async (personId: string) => {
-    if (await useValidate(form)) {
-      return;
-    }
+    await useValidate(form);
+
     $dialog().show("confirm", {
       label: isCreate.value ? "登録する" : "更新する",
       message: isCreate.value

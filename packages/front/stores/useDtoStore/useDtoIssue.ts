@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import { $dto } from "@stores";
-import { tools } from "@tools";
 
 const primitive = {
   id: "",
@@ -36,9 +35,9 @@ export const useDtoIssueStore = defineStore("dtoIssue", {
       }
       return { ...this.value[issueId] };
     },
-    set(issueId: Dto.Id, issue: Dto.Issue) {
-      this.value[issueId] = issue;
-      $dto().issueList.setOne(issueId, issue);
+    set(issueId: Dto.Id, issue: Partial<Dto.Issue>) {
+      this.value[issueId] = { ...this.value[issueId], ...issue };
+      $dto().issueList.setOne(issueId, this.value[issueId]);
       return { ...this.value[issueId] };
     },
     clear(issueId: Dto.Id) {
@@ -57,9 +56,16 @@ export const useDtoIssueStore = defineStore("dtoIssue", {
       })) as Dto.Issue;
       return this.set(response.id, response ?? primitive);
     },
-    async update(issueId: Dto.Id, issue: Dto.Issue) {
-      // TODO:  APIを呼ぶ
-      return (this.value[issueId] = issue);
+    async resend(issueId: Dto.Id) {
+      await useMutation("upsertIssue", {
+        data: {
+          id: issueId,
+        },
+      });
+      this.set(issueId, { status: "pending" });
+    },
+    async delete(issueId: Dto.Id) {
+      await useMutation("deleteIssue", {});
     },
   },
 });

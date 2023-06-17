@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { $dto } from "@stores";
+import { $dialog, $dto, $loading, $notification } from "@stores";
 definePageMeta({
   layout: "dashboard",
 });
@@ -23,7 +23,66 @@ const onEvent = {
   clickBack: () => {
     router.push(`/issues/`);
   },
-  clickNext: async (personId: string) => {},
+  clickDelete: async () => {
+    await $dialog().show("confirm", {
+      message: "相談内容を削除しますか？",
+      label: "削除",
+      color: "warning",
+      icon: "delete",
+      action: async () => {
+        $loading().show(false);
+        await $dto().issue.delete(issueId.value);
+        $notification().pollingStart();
+        $dialog().hide("confirm");
+        $dialog().show("complete", {
+          title: "削除完了",
+          message: "相談内容を削除しました。",
+          buttons: [
+            {
+              label: "相談結果の一覧へ",
+              color: "grey",
+              action: () => {
+                $dialog().hide("complete");
+              },
+            },
+          ],
+          onHide: () => {
+            router.push(`/issues/`);
+          },
+        });
+      },
+    });
+  },
+  clickNext: async () => {
+    await $dialog().show("confirm", {
+      message: "相談内容を再送信しますか？",
+      label: "再送信",
+      iconRight: "send",
+      action: async () => {
+        $loading().show(false);
+        await $dto().issue.resend(issueId.value);
+        $notification().pollingStart();
+        $dialog().hide("confirm");
+        $dialog().show("complete", {
+          title: "相談内容を送信しました。",
+          message:
+            "相談結果の回答には数分時間がかかります。回答ができ次第、アプリ内で通知します。",
+          buttons: [
+            {
+              label: "相談結果の一覧へ",
+              color: "grey",
+              action: () => {
+                $dialog().hide("complete");
+              },
+            },
+          ],
+          onHide: () => {
+            router.push(`/issues/`);
+          },
+        });
+      },
+    });
+  },
 };
 </script>
 
@@ -102,6 +161,16 @@ const onEvent = {
       <ListButton class="q-py-sm">
         <Button icon="chevron_left" color="grey" @click="onEvent.clickBack()"
           >相談結果の履歴へ戻る</Button
+        >
+        <Button icon="delete" color="warning" @click="onEvent.clickDelete()"
+          >削除する</Button
+        >
+        <Button
+          v-if="issue.status === 'failed'"
+          icon-right="send"
+          color="info"
+          @click="onEvent.clickNext()"
+          >再相談する</Button
         >
       </ListButton>
     </q-form>

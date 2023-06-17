@@ -68,34 +68,46 @@ export class IssueResolver {
 
   @UseGuards(AuthGuard)
   @Mutation(() => Response, { description: '.' })
-  async createIssue(
+  async upsertIssue(
     @Args() args: CreateOneIssueArgs,
     @GuardResponse() { user, jwt }: Auth.GuardResponse,
   ) {
     try {
-      if (
-        args.data?.id !== 'create' ||
-        !args.data?.personId ||
-        !args.data?.requestMessage
-      ) {
+      if (!args.data?.id) {
         this.error.throw('bad-request');
       }
-      args.data.id = tools.random.guid();
-      const response = await this.prisma.issue.create({
+      let response = {} as Json;
+      if (args.data.id === 'create') {
+        args.data.id = tools.random.guid();
+        response = await this.prisma.issue.create({
+          data: {
+            ...args.data,
+            userId: user.id,
+          },
+        });
+      } else {
+        response = await this.prisma.issue.findFirst({
+          where: { id: args.data.id },
+        });
+      }
+      if (!response?.id) {
+        this.error.throw('not-found-issue');
+      }
+      await this.prisma.issue.update({
+        where: { id: response.id },
         data: {
-          ...args.data,
           status: 'pending',
-          userId: user.id,
         },
       });
+
       const message = tools.prompt.issue(
-        args.data?.personRelationship ?? '',
-        args.data?.personCharacter ?? '',
-        args.data?.personRecentStatus ?? '',
-        args.data?.personRecentIntimacy ?? '',
-        args.data?.requestMessage ?? '',
-        args.data?.requestDirection ?? '',
-        args.data?.requestLimitLength ?? 0,
+        response?.personRelationship ?? '',
+        response?.personCharacter ?? '',
+        response?.personRecentStatus ?? '',
+        response?.personRecentIntimacy ?? '',
+        response?.requestMessage ?? '',
+        response?.requestDirection ?? '',
+        response?.requestLimitLength ?? 0,
       );
 
       const prisma = this.prisma;

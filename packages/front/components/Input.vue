@@ -3,7 +3,7 @@ import { ValidationRule } from "quasar";
 import { VNodeRef } from "vue";
 
 const props = defineProps<{
-  value?: string;
+  value?: string | number;
   label?: string;
   type?:
     | "text"
@@ -17,13 +17,13 @@ const props = defineProps<{
   icon?: string;
   unit?: string;
   rows?: number;
-  candidates?: string[];
+  candidates?: (string | number)[];
   must?: boolean;
   rules?: ValidationRule[];
 }>();
 const emit = defineEmits(["update:value"]);
 
-const value = ref<string | undefined>(props.value);
+const value = ref<string | number | undefined>(props.value);
 const type = ref<string>(props.type ?? "text");
 const isTextArea = computed(() => type.value === "textarea");
 const isStatic = type.value === "static";
@@ -84,7 +84,6 @@ const onEvent = {
         :rows="rows"
         @blur="$emit('blur')"
       />
-
       <input
         v-else
         class="c-input__field__input"

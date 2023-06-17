@@ -62,7 +62,7 @@ export const useDtoRequestStore = defineStore("dtoRequest", {
           personRecentIntimacy,
           requestMessage,
           requestDirection,
-          requestLimitLength,
+          requestLimitLength: Number(requestLimitLength),
         },
       });
     },

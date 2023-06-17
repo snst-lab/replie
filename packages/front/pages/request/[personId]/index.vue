@@ -93,13 +93,29 @@ watch(
         :key="person.id"
         v-model:value="request.direction"
         label="わたしは"
-        :candidates="['相手を元気づけたい', '誘いを断りたい']"
+        :candidates="[
+          '相手を元気づけたい',
+          '断りたい',
+          '相手と良好な関係を保ちたい',
+        ]"
         :rules="[ (val: string) => val.length <= 50 ||
       '50文字以内で入力してください']"
         class="q-mt-sm"
         @blur="onEvent.blur"
       />
       <label>です</label>
+      <Input
+        type="number"
+        :key="person.id"
+        v-model:value="request.limitLength"
+        label="返信文の文字数制限（省略可）"
+        :candidates="[50, 100, 140, 200, 300, 500]"
+        :rules="[
+           (val: number) => val >= 0 ||'マイナス値は指定できません',
+           (val: number) => val <= 500 ||'文字数制限は500字以内で設定してください']"
+        class="q-mt-sm"
+        @blur="onEvent.blur"
+      />
       <ListButton class="q-py-sm">
         <Button
           icon-right="chevron_right"

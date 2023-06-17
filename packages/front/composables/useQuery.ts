@@ -1,6 +1,6 @@
 import { jsonToGraphQLQuery } from "json-to-graphql-query";
 import { $auth, $dialog, $loading } from "@stores";
-import { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 export async function useQuery(
   methodName: string,
@@ -44,7 +44,7 @@ async function main(
     },
   });
   axios.interceptors.request.clear();
-  axios.interceptors.request.use((config: AxiosRequestConfig) => {
+  axios.interceptors.request.use((config) => {
     $loading().apiStart(methodName);
     return config;
   });

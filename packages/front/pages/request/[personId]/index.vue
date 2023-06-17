@@ -27,9 +27,7 @@ const onEvent = {
     router.push(`/persons/${personId}/`);
   },
   clickNext: async (personId: string) => {
-    if (await useValidate(form)) {
-      return;
-    }
+    await useValidate(form);
     router.push(`/request/${personId}/confirm/`);
   },
   blur: async () => {

@@ -19,5 +19,9 @@ export async function useValidate(form: VNodeRef & { value: any }) {
       inputItem?.focus();
     }
   });
-  return !valid;
+  if (!valid) {
+    return Promise.reject("Validation failed");
+  } else {
+    return true;
+  }
 }

@@ -162,7 +162,11 @@ const onEvent = {
         <Button icon="chevron_left" color="grey" @click="onEvent.clickBack()"
           >相談結果の履歴へ戻る</Button
         >
-        <Button icon="delete" color="warning" @click="onEvent.clickDelete()"
+        <Button
+          v-if="issue.status !== 'pending'"
+          icon="delete"
+          color="warning"
+          @click="onEvent.clickDelete()"
           >削除する</Button
         >
         <Button

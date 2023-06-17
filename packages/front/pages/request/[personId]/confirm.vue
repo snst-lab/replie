@@ -29,17 +29,18 @@ const onEvent = {
   },
   clickNext: async (personId: string) => {
     await $dialog().show("confirm", {
-      label: "送信",
-      message: "相談内容を送信しますか？",
+      message: "相談をリクエストしますか？",
+      label: "リクエストする",
+      iconRight: "send",
       action: async () => {
         $loading().show(false);
         await $dto().request.send(personId);
         $notification().pollingStart();
         $dialog().hide("confirm");
         $dialog().show("complete", {
-          title: "相談内容を送信しました。",
+          title: "相談をリクエストしました。",
           message:
-            "相談結果の回答には数分時間がかかります。回答ができ次第、アプリ内で通知します。",
+            "相談結果の作成には数分時間がかかります。結果が出たら、アプリ内で通知します。",
           buttons: [
             {
               label: "相談結果の一覧へ",

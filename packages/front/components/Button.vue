@@ -42,16 +42,14 @@ const isLoading = computed(() => {
   position: relative;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.2) !important;
   // border: 3px solid white !important;
-
   &__icon-left {
     position: absolute;
-    left: 12px;
+    left: 10%;
   }
   &__icon-right {
     position: absolute;
-    right: 12px;
+    right: 10%;
   }
-
   .q-btn__content {
     font-weight: bold;
     .q-icon {

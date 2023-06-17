@@ -75,13 +75,14 @@ const onEvent = {
   position: relative;
   cursor: pointer;
   height: var(--height);
-  height: 10vh;
+  min-height: 82px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
   &__foreground {
     height: inherit;
+    min-height: inherit;
     position: relative;
     z-index: 1;
     transition: 0.2s;
@@ -99,6 +100,8 @@ const onEvent = {
     }
   }
   &__background {
+    height: inherit;
+    min-height: inherit;
     background-color: $secondary;
     width: 100%;
     height: inherit;

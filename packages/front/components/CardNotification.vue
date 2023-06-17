@@ -77,6 +77,7 @@ const onEvent = {
 .c-card-notification {
   cursor: pointer;
   height: var(--height);
+  min-height: 152px;
   display: flex;
   flex-direction: column;
   justify-content: center;

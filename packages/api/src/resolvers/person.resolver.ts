@@ -25,7 +25,7 @@ export class PersonResolver {
   ) {
     try {
       if (!args.where?.id) {
-        this.error.throw('bad-request');
+        this.error.throw('invalid-parameter');
       }
       const response = await this.prisma.person.findFirst({
         where: { AND: [{ userId: user.id }, { id: args.where.id }] },
@@ -61,7 +61,7 @@ export class PersonResolver {
   ) {
     try {
       if (!args.data?.id || !args.data?.name || !args.data?.relationship) {
-        this.error.throw('bad-request');
+        this.error.throw('invalid-parameter');
       }
       if (args.data.id === 'create') {
         args.data.id = tools.random.guid();

@@ -31,7 +31,7 @@ export class UserResolver {
     try {
       const { authType, userName, secret } = args;
       if (!authType || !secret) {
-        this.error.throw('bad-request');
+        this.error.throw('invalid-parameter');
       }
       const fetched = await this.authService.fetchUser(
         authType,

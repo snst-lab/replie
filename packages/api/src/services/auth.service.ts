@@ -21,7 +21,7 @@ export class AuthService {
             accessToken: secret,
           });
         default:
-          this.error.throw('bad-request');
+          this.error.throw('invalid-parameter');
       }
     } catch (error) {
       this.error.catch(error);

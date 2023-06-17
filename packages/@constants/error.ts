@@ -71,6 +71,12 @@ const error = {
     redirect: "/issues/",
   },
   "bad-request": {
+    message: "不正なリクエストです。",
+    status: 400,
+    logLevel: false,
+    redirect: false,
+  },
+  "invalid-parameter": {
     message: "リクエストの形式が不正です。",
     status: 400,
     logLevel: false,

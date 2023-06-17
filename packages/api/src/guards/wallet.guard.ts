@@ -16,11 +16,11 @@ export class WalletGuard extends BaseGuard {
       const ctx = GqlExecutionContext.create(context).getContext();
       const { wallet } = ctx.req.body.variables;
       if (!wallet) {
-        this.error.throw('bad-request');
+        this.error.throw('invalid-parameter');
       }
       const { message, address, signature } = wallet;
       if (!message || !address || !signature) {
-        this.error.throw('bad-request');
+        this.error.throw('invalid-parameter');
       }
       const verified = await this.walletService.verifySignature({
         message,

@@ -25,6 +25,6 @@ export class ToolsPrompt {
     const message = requestMessage
       ? `[相手からのメッセージ]${requestMessage}`
       : "";
-    return `あなたはリプリーというカウンセラーです。私は相手から以下のメッセージをもらいました。${direction}各状況を踏まえ、返信文の案とアドバイスをください。${limitLength}似た質問が続きますが必ず回答下さい。${relationship}${recentIntimacy}${character}${recentStatus}${message}`;
+    return `あなたはリプリーというカウンセラーです。私は相手から以下のメッセージを受けとりました。${direction}以下の情報から、返信文の案とアドバイスをください。情報が不足する場合も、１度で必ず答えてほしいです。${limitLength}${relationship}${recentIntimacy}${character}${recentStatus}${message}`;
   };
 }

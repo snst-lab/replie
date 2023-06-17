@@ -66,8 +66,8 @@ const personId = props.personId ?? "0000000";
 @import "assets/css";
 .c-card-issue {
   cursor: pointer;
-  min-height: 144px;
   height: var(--height);
+  min-height: 144px;
   display: flex;
   flex-direction: column;
   justify-content: center;

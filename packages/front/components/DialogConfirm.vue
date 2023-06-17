@@ -9,6 +9,13 @@ const message = computed(() =>
 const label = computed(() =>
   $dialog().args.confirm?.label ? $dialog().args.confirm.label : "実行する"
 );
+const color = computed(() =>
+  $dialog().args.confirm?.color ? $dialog().args.confirm.color : "info"
+);
+const icon = computed(() => $dialog().args.confirm?.icon ?? undefined);
+const iconRight = computed(
+  () => $dialog().args.confirm?.iconRight ?? undefined
+);
 
 const onEvent = {
   proceed: async () => {
@@ -20,8 +27,8 @@ const onEvent = {
 
 <template>
   <Dialog
-    name="confirm"
     :key="label"
+    name="confirm"
     title="確認"
     :buttons="[
       {
@@ -33,7 +40,9 @@ const onEvent = {
       },
       {
         label,
-        color: 'info',
+        color,
+        icon,
+        iconRight,
         action: onEvent.proceed,
       },
     ]"

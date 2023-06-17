@@ -28,25 +28,31 @@ const onEvent = {
     router.push(`/request/${personId}/`);
   },
   clickNext: async (personId: string) => {
-    $loading().show(false);
-    await $dto().request.send(personId);
-    $notification().pollingStart();
-    $dialog().hide("confirm");
-    $dialog().show("complete", {
-      title: "相談内容を送信しました。",
-      message:
-        "相談結果の回答には数分時間がかかります。回答ができ次第、アプリ内で通知します。",
-      buttons: [
-        {
-          label: "相談結果の一覧へ",
-          color: "grey",
-          action: () => {
-            $dialog().hide("complete");
+    await $dialog().show("confirm", {
+      label: "送信",
+      message: "相談内容を送信しますか？",
+      action: async () => {
+        $loading().show(false);
+        await $dto().request.send(personId);
+        $notification().pollingStart();
+        $dialog().hide("confirm");
+        $dialog().show("complete", {
+          title: "相談内容を送信しました。",
+          message:
+            "相談結果の回答には数分時間がかかります。回答ができ次第、アプリ内で通知します。",
+          buttons: [
+            {
+              label: "相談結果の一覧へ",
+              color: "grey",
+              action: () => {
+                $dialog().hide("complete");
+              },
+            },
+          ],
+          onHide: () => {
+            router.push(`/issues/`);
           },
-        },
-      ],
-      onHide: () => {
-        router.push(`/issues/`);
+        });
       },
     });
   },

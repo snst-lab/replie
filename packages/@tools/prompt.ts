@@ -20,11 +20,11 @@ export class ToolsPrompt {
       ? `[相手の近況]${personRecentStatus}`
       : "";
     const limitLength = requestLimitLength
-      ? `返信文の文字数制限は${requestLimitLength}文字です。`
-      : "返信文は200文字程度でお願いします。";
+      ? `返信文は${requestLimitLength}文字以内で作りたいです。`
+      : "";
     const message = requestMessage
       ? `[相手からのメッセージ]${requestMessage}`
       : "";
-    return `あなたはリプリーというカウンセラーです。私は相手から以下のメッセージを受けとりました。${direction}以下の情報から、返信文の案とアドバイスをください。情報が不足する場合も、１度で必ず答えてほしいです。${limitLength}${relationship}${recentIntimacy}${character}${recentStatus}${message}`;
+    return `あなたはリプリーというカウンセラーです。私は相手から以下のメッセージを受けとりました。${direction}以下の情報から、返信文の案とアドバイスをください。${limitLength}情報が不足する場合も、１度で必ず答えてほしいです。${relationship}${recentIntimacy}${character}${recentStatus}${message}`;
   };
 }

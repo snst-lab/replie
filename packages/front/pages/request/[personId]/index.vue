@@ -58,7 +58,7 @@ watch(
       相手からのメッセージを貼り付け、あなたの意向を入力し、「確認画面へ」ボタンを押してください。
     </p>
     <Text label class="q-px-md q-py-xs"
-      >返信先の相手（クリックすると相手の情報を編集できます）</Text
+      >返信先の相手（クリックすると情報を編集できます）</Text
     >
     <CardPerson
       :id="person.id"
@@ -88,7 +88,7 @@ watch(
         class="q-mb-md"
         @blur="onEvent.blur"
       />
-      <label>返信文の方向性（省略可）</label>
+      <label>伝えたい意向（省略可）</label>
       <Input
         :key="person.id"
         v-model:value="request.direction"
@@ -112,8 +112,8 @@ watch(
         :candidates="[50, 100, 140, 200, 300, 500]"
         unit="文字"
         :rules="[
-           (val: number) => val >= 0 ||'マイナス値は指定できません',
-           (val: number) => val <= 500 ||'文字数制限は500字以内で設定してください']"
+           (val: number) => !(val < 0) ||'マイナス値は指定できません',
+           (val: number) => !(val > 500)||'文字数制限は500字以内で設定してください']"
         class="q-mt-sm"
         @blur="onEvent.blur"
       />

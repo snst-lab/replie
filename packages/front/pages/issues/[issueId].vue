@@ -116,29 +116,29 @@ const onEvent = {
       <q-separator class="q-my-md" />
       <Text bold>相手の情報</Text>
       <div class="q-pt-md">
-        <Text label>あなたとの関係</Text>
+        <Text label>あなたと相手との関係</Text>
         <p>{{ issue.personRelationship }}</p>
       </div>
       <div class="q-pt-md">
-        <Text label>性格</Text>
+        <Text label>最近のつきあい</Text>
+        <p>{{ issue.personRecentIntimacy }}</p>
+      </div>
+      <div class="q-pt-md">
+        <Text label>相手の性格</Text>
         <p>{{ issue.personCharacter }}</p>
       </div>
       <div class="q-pt-md">
         <Text label>相手の近況</Text>
         <p>{{ issue.personRecentStatus }}</p>
       </div>
-      <div class="q-pt-md">
-        <Text label>最近の相手との関係性</Text>
-        <p>{{ issue.personRecentIntimacy }}</p>
-      </div>
       <q-separator class="q-my-md" />
-      <Text bold>相手とのやりとり</Text>
+      <Text bold>相談内容</Text>
       <div class="q-pt-md">
         <Text label>相手からのメッセージ</Text>
         <p>{{ issue.requestMessage }}</p>
       </div>
       <div class="q-pt-md">
-        <Text label>返信文の方向性</Text>
+        <Text label>伝えたい意向</Text>
         <p>{{ issue.requestDirection }}</p>
       </div>
       <div class="q-pt-md">
@@ -152,7 +152,7 @@ const onEvent = {
         </p>
       </div>
       <q-separator class="q-my-md" />
-      <Text bold>リプリーからのアドバイス</Text>
+      <Text bold>ChatGPTからのアドバイス</Text>
       <div class="q-pt-md">
         <p>
           {{ issue.result }}
@@ -171,11 +171,11 @@ const onEvent = {
           >削除する</Button
         >
         <Button
-          v-if="issue.status === 'failed'"
+          v-if="issue.status !== 'pending'"
           icon-right="send"
           color="info"
           @click="onEvent.clickNext()"
-          >再相談する</Button
+          >相談をやり直す</Button
         >
       </ListButton>
     </q-form>

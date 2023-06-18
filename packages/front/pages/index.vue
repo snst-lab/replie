@@ -12,7 +12,7 @@ const router = useRouter();
     <CardAction
       icon="lightbulb"
       title="返信内容を相談する"
-      description="返信先の相手を選び、相手からのメッセージを元に、返信のしかたについてAIからアドバイスをもらいます。"
+      description="返信先の相手を選び、相手からのメッセージを元に、返信のしかたについてChatGPTからアドバイスをもらいます。"
       @click="router.push(`/persons/`)"
     />
     <CardAction
@@ -26,7 +26,7 @@ const router = useRouter();
       icon="search"
       class="q-mt-lg"
       title="相談結果を見る"
-      description="あなたが相談した内容とAIからのアドバイスを一覧できます。"
+      description="あなたが相談した内容とChatGPTからのアドバイスを一覧できます。"
       @click="router.push(`/issues/`)"
     />
   </div>

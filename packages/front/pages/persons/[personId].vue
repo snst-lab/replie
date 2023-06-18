@@ -140,15 +140,13 @@ const onEvent = {
         must
         :rules="[ (val: string) => val.length <= 50 ||
       '50文字以内で入力してください']"
-        class="q-mt-sm"
+        class="q-mb-md"
       />
+      <label>あなたと相手との関係を教えてください</label>
       <Input
         v-model:value="person.relationship"
         :key="person.id"
-        label="あなたとの関係"
-        :rules="[ (val: string) => val.length <= 50 ||
-      '50文字以内で入力してください']"
-        must
+        label="私から見て相手は"
         :candidates="[
           '友だち',
           '先輩',
@@ -158,33 +156,44 @@ const onEvent = {
           '取引先',
           '他人',
         ]"
+        unit="です"
+        must
+        :rules="[ (val: string) => val.length <= 50 ||
+      '50文字以内で入力してください']"
+        class="q-mb-md"
       />
+      <label>最近のつきあいについて教えてください（省略可）</label>
       <Input
         v-model:value="person.recentIntimacy"
         :key="person.id"
-        label="最近のつきあい"
-        :candidates="['良好', '険悪', '疎遠']"
+        :label="`私と相手は最近`"
+        :candidates="['良好な関係', '険悪な雰囲気', '疎遠']"
+        unit="です"
         :rules="[ (val: string) => val.length <= 50 ||
       '50文字以内で入力してください']"
-        class="q-mt-sm"
+        class="q-mb-md"
       />
+      <label>相手の性格について教えてください（省略可）</label>
       <Input
         v-model:value="person.character"
         :key="person.id"
-        label="相手の性格"
-        :candidates="['優しい', '勝ち気', '神経質']"
+        :label="`相手は`"
+        :candidates="['優しい', '勝ち気な', '神経質な']"
+        unit="性格です"
         :rules="[ (val: string) => val.length <= 50 ||
       '50文字以内で入力してください']"
-        class="q-mt-sm"
+        class="q-mb-md"
       />
+      <label>相手の近況について教えてください（省略可）</label>
       <Input
         v-model:value="person.recentStatus"
         :key="person.id"
-        label="相手の近況"
-        :candidates="['元気', '忙しい', '病気がち']"
+        :label="`相手は最近`"
+        :candidates="['元気そう', '忙しそう', '病気がち']"
+        unit="です"
         :rules="[ (val: string) => val.length <= 50 ||
       '50文字以内で入力してください']"
-        class="q-mt-sm"
+        class="q-mb-md"
       />
 
       <ListButton class="q-py-sm">

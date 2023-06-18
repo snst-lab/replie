@@ -65,7 +65,7 @@ const onEvent = {
   <div class="q-pb-xl">
     <TextTitle center :back="`/request/${personId}`">確認画面</TextTitle>
     <p class="q-pb-sm q-px-md">
-      以下の内容でAIに相談します。よろしければ「相談内容を送信する」ボタンを押してください。
+      以下の内容でChatGPTに相談します。よろしければ「相談内容を送信する」ボタンを押してください。
     </p>
     <Text label class="q-px-md q-pb-xs">返信先の相手</Text>
     <CardPerson
@@ -95,7 +95,7 @@ const onEvent = {
       </div>
 
       <q-separator class="q-my-md" />
-      <Text check bold>相手とのやりとり</Text>
+      <Text check bold>相談内容</Text>
       <div class="q-pt-md">
         <Text label>相手からのメッセージ</Text>
         <p>
@@ -103,7 +103,7 @@ const onEvent = {
         </p>
       </div>
       <div class="q-pt-md">
-        <Text label>返信文の方向性</Text>
+        <Text label>伝えたい意向</Text>
         <p>{{ request.direction || "指定なし" }}</p>
       </div>
       <div class="q-pt-md">

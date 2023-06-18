@@ -8,23 +8,30 @@ export class ToolsPrompt {
     requestDirection?: string,
     requestLimitLength?: number
   ) => {
-    const direction = requestDirection ? `私は${requestDirection}です。` : "";
-    const relationship = personRelationship
-      ? `[私と相手の関係]${personRelationship}`
+    const relationship = personRelationship ? personRelationship : "ある相手";
+    const limitLength = requestLimitLength
+      ? `文案は${requestLimitLength}文字以内で作りたいです。`
+      : "";
+    const direction = requestDirection
+      ? `私の意向として、私は${requestDirection}です。`
       : "";
     const recentIntimacy = personRecentIntimacy
-      ? `[直近のつきあい]${personRecentIntimacy}`
+      ? `私と相手は最近${personRecentIntimacy}です。`
       : "";
-    const character = personCharacter ? `[相手の性格]${personCharacter}` : "";
+    const character = personCharacter
+      ? `相手は${personCharacter}性格です。`
+      : "";
     const recentStatus = personRecentStatus
-      ? `[相手の近況]${personRecentStatus}`
+      ? `相手は最近${personRecentStatus}です。`
       : "";
-    const limitLength = requestLimitLength
-      ? `返信文は${requestLimitLength}文字以内で作りたいです。`
-      : "";
-    const message = requestMessage
-      ? `[相手からのメッセージ]${requestMessage}`
-      : "";
-    return `あなたはリプリーというカウンセラーです。私は相手から以下のメッセージを受けとりました。${direction}以下の情報から、返信文の案とアドバイスをください。${limitLength}情報が不足する場合も、１度で必ず答えてほしいです。${relationship}${recentIntimacy}${character}${recentStatus}${message}`;
+    // const other = requestOther ? `[補足情報]${requestOther}` : "";
+    return `あなたはChatGPTカウンセラーです。私は${relationship}から以下のメッセージをもらったのですが、相手にどう返信したらよいか文案とアドバイスをください。${limitLength}${
+      requestDirection ||
+      personRecentIntimacy ||
+      personCharacter ||
+      personRecentStatus
+        ? "ちなみに、"
+        : ""
+    }${direction}${recentIntimacy}${character}${recentStatus}文案作成のための情報が不足している場合は、補足情報が必要な旨教えてください。よろしくお願いします。\n${relationship}からのメッセージ「${requestMessage}」`;
   };
 }

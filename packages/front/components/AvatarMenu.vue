@@ -5,6 +5,7 @@ const props = defineProps<{
   outline?: boolean;
   shadow?: boolean;
   blockie?: boolean;
+  animal?: boolean;
 }>();
 </script>
 
@@ -16,6 +17,7 @@ const props = defineProps<{
     :outline="outline"
     :shadow="shadow"
     :blockie="blockie"
+    :animal="animal"
   >
     <q-btn fab-mini unelevated flat class="c-avata-menu__btn">
       <q-menu auto-close style="min-width: 200px">

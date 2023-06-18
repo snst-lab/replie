@@ -9,7 +9,9 @@ const scss = useScssVars();
 const isDrawerOpen = ref<boolean>(false);
 const isDrawerMin = ref<boolean>(false);
 const drawerBehavior = ref<"desktop" | "mobile">("desktop");
-const name = ref<string>($auth().user.lastName + " " + $auth().user.firstName);
+const name = ref<string>(
+  $auth().user.lastName ?? "" + " " + $auth().user.firstName ?? ""
+);
 
 const drawerContents: {
   icon: string;
@@ -192,6 +194,7 @@ const onEvent = {
               :src="$auth().user.avatar"
               :size="isDrawerMin ? 24 : 50"
               :key="Number(isDrawerMin)"
+              animal
             >
               <q-item clickable @click="onEvent.clickLogin()">
                 <q-item-section class="col-2"
@@ -211,7 +214,8 @@ const onEvent = {
               </q-item>
             </AvatarMenu>
             <p class="ellipsis-2-lines" v-if="!isDrawerMin">
-              {{ name || "ゲストユーザー" }}
+              <!-- {{ name || "ゲストユーザー" }} -->
+              中村 花子
             </p>
             <q-tooltip
               v-if="isDrawerMin && name"

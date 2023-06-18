@@ -69,32 +69,33 @@ const onEvent = {
     <dl class="c-input__candidates q-py-xs" v-if="hasCandidates">
       <dd v-for="e in candidates" @click="onEvent.clickCandidate">{{ e }}</dd>
     </dl>
-    <q-field
-      v-if="!isStatic"
-      :model-value="value"
-      class="c-input__field q-pt-xs"
-      outlined
-      :rules="rules"
-    >
-      <q-icon class="c-input__field__icon" :name="icon" />
-      <textarea
-        v-if="isTextArea"
-        class="c-input__field__input"
-        v-model="value"
-        :rows="rows"
-        @blur="$emit('blur')"
-      />
-      <input
-        v-else
-        class="c-input__field__input"
-        v-model="value"
-        :type="type"
-        @blur="$emit('blur')"
-      />
-      <div v-if="unit" class="c-input__field__unit">
+    <div v-if="!isStatic" class="row items-center">
+      <q-field
+        :model-value="value"
+        class="c-input__field q-pt-xs col"
+        outlined
+        :rules="rules"
+      >
+        <q-icon class="c-input__field__icon" :name="icon" />
+        <textarea
+          v-if="isTextArea"
+          class="c-input__field__input"
+          v-model="value"
+          :rows="rows"
+          @blur="$emit('blur')"
+        />
+        <input
+          v-else
+          class="c-input__field__input"
+          v-model="value"
+          :type="type"
+          @blur="$emit('blur')"
+        />
+      </q-field>
+      <div v-if="unit" class="q-px-sm q-mb-md">
         {{ unit }}
       </div>
-    </q-field>
+    </div>
     <q-field
       v-else
       :model-value="value"
@@ -103,8 +104,7 @@ const onEvent = {
       :rules="rules"
       reactive-rules
     >
-      {{ value }}
-      {{ unit }}
+      {{ value }} {{ unit }}
     </q-field>
   </div>
 </template>
@@ -169,8 +169,7 @@ const onEvent = {
         color: $grey-9;
       }
     }
-    &__input,
-    &__unit {
+    &__input {
       width: 100%;
       padding: 12px 50px 12px 50px;
       padding-left: var(--paddingLeft);
@@ -200,16 +199,8 @@ const onEvent = {
       line-height: 18px;
     }
 
-    &__unit {
-      border: none;
-      display: inline-flex;
-      align-items: center;
-      white-space: nowrap;
-      padding: 0 8px;
-      width: auto;
-    }
-
     &--static {
+      width: 100%;
       .q-field__control {
         min-height: 24px !important;
 

@@ -56,7 +56,10 @@ export class QueueService implements OnModuleInit, OnModuleDestroy {
   }
 
   async enqueue(index: number) {
-    if (!this.queueMaster[index] || !this.queueState[index]) {
+    if (
+      typeof this.queueMaster[index] === 'undefined' ||
+      typeof this.queueState[index] === 'undefined'
+    ) {
       this.error.throw('not-found-cache');
     }
     this.queueState[index] = false;
@@ -125,6 +128,7 @@ export class QueueService implements OnModuleInit, OnModuleDestroy {
           });
       }
     } catch (error) {
+      await onFailed(error);
       this.error.catch(error);
     }
   }

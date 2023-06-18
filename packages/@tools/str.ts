@@ -20,4 +20,14 @@ export class ToolsStr {
     }
     return result;
   }
+  removeEmoji(srcString: string) {
+    srcString.replace(
+      /[\uD800-\uDBFF][\uDC00-\uDFFF]|[\u2600-\u27FF]|[\uD83C][\uDF00-\uDFFF]|[\uD83D][\uDC00-\uDE4F]/g,
+      ""
+    );
+    srcString = [...srcString]
+      .filter((char) => char.charCodeAt(0) <= 65535)
+      .join("");
+    return srcString;
+  }
 }

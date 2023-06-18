@@ -83,6 +83,7 @@ export class IssueResolver {
           data: {
             ...args.data,
             id: tools.random.guid(),
+            requestMessage: tools.str.removeEmoji(args.data.requestMessage),
             userId: user.id,
           },
         });
@@ -125,7 +126,7 @@ export class IssueResolver {
               where: { id: response.id },
               data: {
                 status: 'done',
-                result,
+                result: tools.str.removeEmoji(result),
               },
             });
             await prisma.notification.create({
@@ -144,6 +145,8 @@ export class IssueResolver {
               where: { id: response.id },
               data: {
                 status: 'failed',
+                result:
+                  'アドバイスの作成に失敗しました。失敗が続く場合は、相談内容に情報が不足している可能性もあります。補足情報を追加し、再度試してみてください。',
               },
             });
             await prisma.notification.create({

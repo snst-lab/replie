@@ -94,7 +94,7 @@ const onEvent = {
               },
             },
             {
-              label: "この相手への返事を考える",
+              label: "この相手への返信文を考える",
               color: "info",
               iconRight: "chevron_right",
               action: () => {
@@ -117,7 +117,7 @@ const onEvent = {
     <template v-if="isCreate">
       <TextTitle center back>相手の情報を登録する</TextTitle>
       <p class="q-pb-sm q-px-md">
-        以下に返事をしたい相手の情報を入力してください。<br />入力内容は後から変更できます。<br />空白のままでも登録できますが、入力することでより実情にあったアドバイスができるようになります。
+        以下に返信をしたい相手の情報を入力してください。<br />入力内容は後から変更できます。<br />空白のままでも登録できますが、入力することでより実情にあったアドバイスができるようになります。
       </p>
     </template>
     <template v-else>

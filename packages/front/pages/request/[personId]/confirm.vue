@@ -29,12 +29,13 @@ const onEvent = {
   },
   clickNext: async (personId: string) => {
     await $dialog().show("confirm", {
-      message: "相談をリクエストしますか？",
-      label: "リクエストする",
+      message: "相談内容を送信しますか？",
+      label: "送信",
       iconRight: "send",
       action: async () => {
         $loading().show(false);
         await $dto().request.send(personId);
+        $dto().request.clear(personId);
         $notification().pollingStart();
         $dialog().hide("confirm");
         $dialog().show("complete", {
@@ -66,7 +67,7 @@ const onEvent = {
     <p class="q-pb-sm q-px-md">
       以下の内容でAIに相談します。よろしければ「相談内容を送信する」ボタンを押してください。
     </p>
-    <Text label class="q-px-md q-pb-xs">返事をする相手</Text>
+    <Text label class="q-px-md q-pb-xs">返信先の相手</Text>
     <CardPerson
       :id="person.id"
       :name="person.name"
@@ -102,11 +103,11 @@ const onEvent = {
         </p>
       </div>
       <div class="q-pt-md">
-        <Text label>返事の意向</Text>
+        <Text label>返信文の方向性</Text>
         <p>{{ request.direction || "指定なし" }}</p>
       </div>
       <div class="q-pt-md">
-        <Text label>返事の文字数制限</Text>
+        <Text label>返信文の文字数制限</Text>
         <p>
           {{
             request.limitLength

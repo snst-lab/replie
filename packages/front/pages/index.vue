@@ -12,14 +12,14 @@ const router = useRouter();
     <CardAction
       icon="lightbulb"
       title="返信内容を相談する"
-      description="返信をする相手を選び、相手のメッセージに基づいて、AIにアドバイスをもらいます。"
+      description="返信先の相手を選び、相手からのメッセージを元に、返信のしかたについてAIからアドバイスをもらいます。"
       @click="router.push(`/persons/`)"
     />
     <CardAction
-      icon="edit"
+      icon="person"
       class="q-mt-lg"
       title="返信先を登録"
-      description="返信相手とあなたの関係、相手の性格、最近の状況などを登録できます。"
+      description="返信相手の名前、あなたとの関係、相手の性格などを登録できます。"
       @click="router.push(`/persons/create/`)"
     />
     <CardAction

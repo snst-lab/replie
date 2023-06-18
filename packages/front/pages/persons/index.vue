@@ -28,8 +28,8 @@ const onEvent = {
 <template>
   <div class="p-persons q-pb-xl">
     <template v-if="personList.length">
-      <TextTitle center back="/">誰への返事をしますか</TextTitle>
-      <p class="q-pb-sm q-px-md">返事をする相手を選んでください。</p>
+      <TextTitle center back="/">誰への返信をしますか</TextTitle>
+      <p class="q-pb-sm q-px-md">返信先の相手を選んでください。</p>
       <CardPerson
         v-for="(v, i) in personList"
         :id="v.id"

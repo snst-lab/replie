@@ -54,8 +54,8 @@ const onEvent = {
   },
   clickNext: async () => {
     await $dialog().show("confirm", {
-      message: "再相談をリクエストしますか？",
-      label: "リクエストする",
+      message: "再相談内容を送信しますか？",
+      label: "送信",
       iconRight: "send",
       action: async () => {
         $loading().show(false);
@@ -88,7 +88,9 @@ const onEvent = {
 <template>
   <div class="q-pb-xl">
     <TextTitle center back>相談結果を見る</TextTitle>
-    <Text label class="q-pb-sm q-px-md">以下の相手への返事の相談結果です</Text>
+    <Text label class="q-pb-sm q-px-md"
+      >以下の相手への返信案とアドバイスです</Text
+    >
     <CardPerson
       :id="issue.personId"
       :name="person.name"
@@ -136,7 +138,7 @@ const onEvent = {
         <p>{{ issue.requestMessage }}</p>
       </div>
       <div class="q-pt-md">
-        <Text label>返事の意向</Text>
+        <Text label>返信文の方向性</Text>
         <p>{{ issue.requestDirection }}</p>
       </div>
       <div class="q-pt-md">

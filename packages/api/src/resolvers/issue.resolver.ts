@@ -134,7 +134,7 @@ export class IssueResolver {
                 userId: user.id,
                 personId: response.personId,
                 title: '新しいアドバイスが届きました',
-                message: `次のメッセージへの返事をアドバイスします「${response.requestMessage}」`,
+                message: `次のメッセージへのアドバイス「${response.requestMessage}」`,
                 linkTo: `/issues/${response.id}`,
               },
             });
@@ -152,7 +152,7 @@ export class IssueResolver {
                 userId: user.id,
                 personId: response.personId,
                 title: 'アドバイスの作成に失敗しました',
-                message: `次のメッセージへのアドバイスの作成に失敗しました。リトライしてみてください。「${response.requestMessage}」`,
+                message: `次のメッセージへのアドバイス「${response.requestMessage}」`,
                 linkTo: `/issues/${response.id}`,
               },
             });

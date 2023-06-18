@@ -91,6 +91,9 @@ const onEvent = {
         :type="type"
         @blur="$emit('blur')"
       />
+      <div v-if="unit" class="c-input__field__unit">
+        {{ unit }}
+      </div>
     </q-field>
     <q-field
       v-else
@@ -166,7 +169,8 @@ const onEvent = {
         color: $grey-9;
       }
     }
-    &__input {
+    &__input,
+    &__unit {
       width: 100%;
       padding: 12px 50px 12px 50px;
       padding-left: var(--paddingLeft);
@@ -194,6 +198,15 @@ const onEvent = {
       }
       letter-spacing: 1px;
       line-height: 18px;
+    }
+
+    &__unit {
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      padding: 0 8px;
+      width: auto;
     }
 
     &--static {

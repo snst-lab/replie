@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 const primitive = {
   message: "",
   direction: "",
-  limitLength: 0,
+  limitLength: undefined,
 } satisfies Dto.Request;
 
 export const useDtoRequestStore = defineStore("dtoRequest", {

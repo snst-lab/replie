@@ -2,7 +2,8 @@ import { LoggerService } from "@nestjs/common";
 
 const error = {
   unknown: {
-    message: "エラーが発生しました。",
+    message:
+      "エラーが発生しました。時間を置いて再試行いただき、それでも改善しない場合は、運営者へお問い合わせください。",
     status: 500,
     logLevel: "error",
     redirect: "#error",
@@ -59,7 +60,8 @@ const error = {
     redirect: "/persons/",
   },
   "not-found-cache": {
-    message: "キャッシュが見つかりません。",
+    message:
+      "サーバー上のキャッシュが見つかりません。時間を置いて再試行いただき、それでも改善しない場合は、運営者へお問い合わせください。",
     status: 404,
     logLevel: false,
     redirect: false,
@@ -83,7 +85,7 @@ const error = {
     redirect: false,
   },
   "invalid-signature": {
-    message: "署名の検証に失敗しました。",
+    message: "署名の検証に失敗しました",
     status: 400,
     logLevel: false,
     redirect: false,

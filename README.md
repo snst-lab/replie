@@ -2,6 +2,8 @@
 
 This is an AI-based communication support tool
 
+![cap-demo](https://github.com/snst-lab/replie/assets/40202502/e9f14b88-dbd4-447e-b3a3-0c6670329e5a)
+
 <br>
 
 ## Feature

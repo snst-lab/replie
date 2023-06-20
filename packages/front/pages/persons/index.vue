@@ -7,18 +7,15 @@ definePageMeta({
 
 const router = useRouter();
 
-const personList = ref<Dto.Person[]>($dto().personList.init());
-
 onMounted(async () => {
-  personList.value = await $dto().personList.fetch();
-  personList.value = personList.value.filter((e) => e.id !== "create");
-  if (!personList.value[0]) {
+  await $dto().personList.fetch();
+  if (!$dto().personList.value[0]) {
     router.replace("/persons/create/");
   }
 });
 
 const onEvent = {
-  clickCard: (personId: string) => {
+  clickPerson: (personId: string) => {
     router.push(`/request/${personId}/`);
   },
   clickAdd: () => {
@@ -29,17 +26,17 @@ const onEvent = {
 
 <template>
   <div class="p-persons q-pb-xl">
-    <template v-if="personList[0]">
+    <template v-if="$dto().personList.value[0]">
       <TextTitle center back="/">誰への返信をしますか</TextTitle>
       <p class="q-pb-sm q-px-md">返信先の相手を選んでください。</p>
       <CardPerson
-        v-for="(v, i) in personList"
+        v-for="(v, i) in $dto().personList.value"
         :id="v.id"
         :avatar="v.avatar"
         :name="v.name"
         :relationship="v.relationship"
         canDelete
-        @click="onEvent.clickCard(v.id)"
+        :onClick="onEvent.clickPerson"
         icon="chevron_right"
       />
     </template>

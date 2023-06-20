@@ -64,5 +64,15 @@ export const useDtoPersonStore = defineStore("dtoPerson", {
       await this.set(response.id, response);
       return { ...this.value[personId] };
     },
+    async delete(personId: Dto.Id) {
+      const response = (await useMutation("deletePerson", {
+        where: {
+          id: personId,
+        },
+      })) as boolean;
+      if (response) {
+        this.clear(personId);
+      }
+    },
   },
 });

@@ -31,7 +31,7 @@ const onEvent = {
     :style="`border-left: 4px solid ${useColor('random', randomSeed)}`"
     @click="onEvent.clickCard"
   >
-    <div style="height: 0px" class="row">
+    <div class="row" style="height: 0px">
       <q-badge
         :color="data.unread ? 'positive' : 'transparent'"
         rounded
@@ -49,7 +49,7 @@ const onEvent = {
         </div>
         <div class="row items-center q-gutter-x-sm q-pt-sm q-pl-sm">
           <div class="q-pt-xs">
-            <small class="text-grey-8 ellipsis-2-lines">
+            <small class="ellipsis-2-lines">
               {{ data.message }}
             </small>
           </div>
@@ -81,12 +81,12 @@ const onEvent = {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid $grey-4;
+  border: 1px solid $grey-2;
   background-color: white;
   transition: background-color 0.2s;
   .body--dark & {
     background-color: $grey-10;
-    border: 1px solid $grey-8;
+    border: 1px solid $grey-9;
   }
   &:hover {
     background-color: $primary;

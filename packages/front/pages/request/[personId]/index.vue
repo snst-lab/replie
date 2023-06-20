@@ -67,7 +67,7 @@ watch(
       :name="person.name"
       :avatar="person.avatar"
       :relationship="person.relationship"
-      @click="onEvent.clickPerson(person.id)"
+      :onClick="onEvent.clickPerson"
       icon="mode_edit"
     />
     <q-form class="q-px-md q-pt-sm" ref="form" lazy-validation>

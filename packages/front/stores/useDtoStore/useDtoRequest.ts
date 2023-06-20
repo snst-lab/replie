@@ -41,6 +41,14 @@ export const useDtoRequestStore = defineStore("dtoRequest", {
       }
       return { ...primitive };
     },
+    reuse(issue: Dto.Issue) {
+      this.set(issue.personId, {
+        type: issue.type,
+        message: issue.requestMessage,
+        direction: issue.requestDirection,
+        limitLength: issue.requestLimitLength,
+      });
+    },
     async send(personId: Dto.Id) {
       const {
         name: personName,

@@ -3,9 +3,10 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { ErrorService, PrismaService } from '@/services';
 import { AuthGuard, GuardResponse } from '@/guards';
 import { Response } from '@/types';
-import { CreateOnePersonArgs } from '@generated/person/create-one-person.args';
 import { FindFirstPersonArgs } from '@generated/person/find-first-person.args';
 import { FindManyPersonArgs } from '@generated/person/find-many-person.args';
+import { CreateOnePersonArgs } from '@generated/person/create-one-person.args';
+import { DeleteOnePersonArgs } from '@generated/person/delete-one-person.args';
 import { tools } from '@tools';
 
 @Resolver()
@@ -90,6 +91,31 @@ export class PersonResolver {
         });
         return { response, jwt };
       }
+    } catch (error) {
+      this.error.catch(error);
+    }
+  }
+
+  @Mutation(() => Response, { description: '.' })
+  @UseGuards(AuthGuard)
+  async deletePerson(
+    @Args() args: DeleteOnePersonArgs,
+    @GuardResponse() { user, jwt }: Auth.GuardResponse,
+  ) {
+    try {
+      if (!args.where?.id) {
+        this.error.throw('invalid-parameter');
+      }
+      const response = await this.prisma.person.findFirst({
+        where: { AND: [{ userId: user.id }, { id: args.where.id }] },
+      });
+      if (!response?.id) {
+        this.error.throw('not-found-person');
+      }
+      await this.prisma.person.delete({
+        where: { id: response.id },
+      });
+      return { response: true, jwt };
     } catch (error) {
       this.error.catch(error);
     }

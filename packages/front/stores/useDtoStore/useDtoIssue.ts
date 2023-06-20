@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { $dto } from "@stores";
+import { $dialog, $dto } from "@stores";
 
 const primitive = {
   id: "",
@@ -55,7 +55,7 @@ export const useDtoIssueStore = defineStore("dtoIssue", {
       await this.set(response.id, response);
       return { ...this.value[issueId] };
     },
-    async resend(issueId: Dto.Id) {
+    async retry(issueId: Dto.Id) {
       const response = (await useMutation("upsertIssue", {
         data: {
           id: issueId,

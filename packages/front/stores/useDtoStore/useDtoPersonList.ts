@@ -22,20 +22,21 @@ export const useDtoPersonListStore = defineStore("dtoPersonList", {
       }
     },
     set(personId: Dto.Id, person: Dto.Person) {
+      if (personId === "create") {
+        return;
+      }
       const index = this.value.findIndex((e) => e.id === personId);
       if (index === -1) {
         this.value.push(person);
       } else {
         this.value[index] = person;
       }
-      return [...this.value];
     },
     clear(personId: Dto.Id) {
       const index = this.value.findIndex((e) => e.id === personId);
       if (index !== -1) {
         this.value.splice(index, 1);
       }
-      return [...this.value];
     },
     setAll(persons: Dto.Person[]) {
       this.value = [...persons];

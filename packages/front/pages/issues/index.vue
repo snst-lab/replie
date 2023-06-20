@@ -4,8 +4,6 @@ import { tools } from "@tools";
 definePageMeta({
   layout: "dashboard",
 });
-const router = useRouter();
-
 const { public: constants } = useRuntimeConfig();
 const { issuesPerPage } = constants.number;
 
@@ -14,9 +12,6 @@ onMounted(async () => {
 });
 
 const onEvent = {
-  clickCard: (personId: string, issueId: string) => {
-    router.push(`/issues/${issueId}/`);
-  },
   scrollDown: async (index: number, done: () => void) => {
     if ($dto().issueList.value.length < issuesPerPage) {
       await done();
@@ -38,6 +33,7 @@ const onEvent = {
         <template #default>
           <CardIssue
             v-for="e in $dto().issueList.value"
+            :id="e.id"
             :type="e.type"
             :personId="e.personId"
             :personName="e.personName"
@@ -45,7 +41,6 @@ const onEvent = {
             :status="e.status"
             :datetime="e.createdAt"
             :message="e.requestMessage"
-            @click="onEvent.clickCard(e.personId, e.id)"
           />
         </template>
         <template #loading>

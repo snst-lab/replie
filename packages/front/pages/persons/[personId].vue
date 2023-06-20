@@ -146,7 +146,7 @@ const onEvent = {
       <Input
         v-model:value="person.relationship"
         :key="person.id"
-        label="私から見て相手は"
+        label="私から見て相手は　　　　　"
         :candidates="[
           '友だち',
           '先輩',

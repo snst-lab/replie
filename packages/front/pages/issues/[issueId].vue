@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { $dialog, $dto, $loading, $notification } from "@stores";
+import { $dialog, $dto, $loading } from "@stores";
 definePageMeta({
   layout: "dashboard",
 });
@@ -17,7 +17,6 @@ onMounted(async () => {
 });
 
 const onEvent = {
-  clickCard: (personId: string) => {},
   clickBack: () => {
     router.push(`/issues/`);
   },
@@ -25,7 +24,7 @@ const onEvent = {
     await $dialog().show("confirm", {
       message: "相談内容を削除しますか？",
       label: "削除",
-      color: "warning",
+      color: "negative",
       icon: "delete",
       action: async () => {
         $loading().show(false);
@@ -50,35 +49,25 @@ const onEvent = {
       },
     });
   },
-  clickNext: async () => {
-    await $dialog().show("confirm", {
-      message: "再相談内容を送信しますか？",
-      label: "送信",
-      iconRight: "send",
-      action: async () => {
-        $loading().show(false);
-        await $dto().issue.resend(issueId.value);
-        $notification().pollingStart();
-        $dialog().hide("confirm");
-        $dialog().show("complete", {
-          title: "再相談をリクエストしました。",
-          message:
-            "相談結果の作成には数分時間がかかります。結果が出たら、アプリ内で通知します。",
-          buttons: [
-            {
-              label: "相談結果の一覧へ",
-              color: "grey",
-              action: () => {
-                $dialog().hide("complete");
-              },
-            },
-          ],
-          onHide: () => {
-            router.push(`/issues/`);
-          },
-        });
-      },
-    });
+  clickReuse: async () => {
+    const exist = $dto().request.get(issue.value.personId);
+    if (exist.message || exist.direction || exist.limitLength) {
+      await $dialog().show("confirm", {
+        message:
+          "同じ相手への編集中の相談があります。再相談を作成すると、編集中の相談が上書きされます。続行しますか？",
+        label: "続行する",
+        color: "warning",
+        iconRight: "chevron_right",
+        action: async () => {
+          await $dto().request.reuse(issue.value);
+          $dialog().hide("confirm");
+          router.push(`/request/${issue.value.personId}`);
+        },
+      });
+    } else {
+      await $dto().request.reuse(issue.value);
+      router.push(`/request/${issue.value.personId}`);
+    }
   },
 };
 </script>
@@ -94,7 +83,6 @@ const onEvent = {
       :name="issue.personName"
       :avatar="issue.personAvatar"
       :relationship="issue.personRelationship"
-      @click="onEvent.clickCard(issue.personId)"
     />
     <q-form class="q-px-md q-py-md">
       <q-badge
@@ -164,7 +152,7 @@ const onEvent = {
         <Button
           v-if="issue.status !== 'pending'"
           icon="delete"
-          color="warning"
+          color="negative"
           @click="onEvent.clickDelete()"
           >削除する</Button
         >
@@ -172,8 +160,8 @@ const onEvent = {
           v-if="issue.status !== 'pending'"
           icon-right="send"
           color="info"
-          @click="onEvent.clickNext()"
-          >相談をやり直す</Button
+          @click="onEvent.clickReuse()"
+          >結果を元に再相談する</Button
         >
       </ListButton>
     </q-form>

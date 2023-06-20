@@ -192,7 +192,7 @@ export class IssueResolver {
         this.error.throw('not-found-issue');
       }
       await this.prisma.issue.delete({
-        where: { id: args.where.id },
+        where: { id: response.id },
       });
       return { response: true, jwt };
     } catch (error) {

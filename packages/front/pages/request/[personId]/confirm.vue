@@ -21,7 +21,7 @@ onMounted(async () => {
 });
 
 const onEvent = {
-  clickCard: (personId: string) => {
+  clickPerson: (personId: string) => {
     router.push(`/persons/${personId}/`);
   },
   clickBack: (personId: string) => {
@@ -73,7 +73,7 @@ const onEvent = {
       :name="person.name"
       :avatar="person.avatar"
       :relationship="person.relationship"
-      @click="onEvent.clickCard(personId)"
+      :onClick="onEvent.clickPerson"
     />
     <q-form class="q-px-md q-py-md">
       <Text check bold>相手の情報</Text>

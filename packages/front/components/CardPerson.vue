@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { $dialog, $dto, $loading } from "@stores";
+
 const props = defineProps<{
   id: string;
   name: string;
@@ -6,8 +8,9 @@ const props = defineProps<{
   relationship: string;
   icon?: string;
   canDelete?: boolean;
+  onClick?: (personId: string) => void;
 }>();
-
+const router = useRouter();
 const { public: constants } = useRuntimeConfig();
 const personsPerPage = constants.number.personsPerPage as number;
 
@@ -22,9 +25,32 @@ const onEvent = {
     if (!props.canDelete) return;
     event.evt.target.classList.remove("c-card-person__foreground--swipe-left");
   },
-  clickDelete: (event: Json) => {
+  clickCard: () => {
+    if (!props.onClick) return;
+    props.onClick(props.id);
+  },
+  clickDelete: () => {
     if (!props.canDelete) return;
-    info(event);
+    $dialog().show("confirm", {
+      message: "返信相手の情報を削除しますか？",
+      label: "削除",
+      color: "negative",
+      icon: "delete",
+      action: async () => {
+        $loading().show(false);
+        await $dto().person.delete(props.id);
+        $dialog().hide("confirm");
+        $dialog().show("complete", {
+          title: "削除完了",
+          message: "返信相手の情報を削除しました。",
+        });
+        document
+          .querySelectorAll(".c-card-person__foreground")
+          .forEach((el) => {
+            el.classList.remove("c-card-person__foreground--swipe-left");
+          });
+      },
+    });
   },
 };
 </script>
@@ -32,12 +58,13 @@ const onEvent = {
 <template>
   <div class="c-card-person">
     <div
-      class="c-card-person__foreground q-px-md q-py-md row items-center justify-between"
+      class="c-card-person__foreground q-px-md q-py-md flex items-center justify-between"
       :style="`border-left: 4px solid ${useColor('random', id)}`"
+      @click="onEvent.clickCard"
       v-touch-swipe.mouse.left="onEvent.swipeLeft"
       v-touch-swipe.mouse.right="onEvent.swipeRight"
     >
-      <div class="row items-center">
+      <div class="no-pointer-events row items-center">
         <Avatar outline animal :seed="id" />
         <div class="q-px-md">
           <p class="ellipsis">{{ name }}</p>
@@ -85,10 +112,10 @@ const onEvent = {
     min-height: inherit;
     position: relative;
     z-index: 1;
-    transition: 0.2s;
-    transition-timing-function: cubic-bezier(0, 0.8, 0.45, 1);
     background-color: white;
     border: 1px solid $grey-2;
+    transition: 0.2s;
+    transition-timing-function: cubic-bezier(0, 0.8, 0.45, 1);
     .body--dark & {
       background-color: $grey-10;
       border: 1px solid $grey-9;

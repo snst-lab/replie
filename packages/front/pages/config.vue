@@ -7,11 +7,7 @@ const router = useRouter();
 
 onMounted(async () => {});
 
-const onEvent = {
-  clickCard: (personId: string) => {
-    router.push(`/request/${personId}/`);
-  },
-};
+const onEvent = {};
 </script>
 
 <template>

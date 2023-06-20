@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
+  type: string;
   personId: string;
   personName: string;
   status: string;
@@ -12,6 +13,25 @@ const issueStatus = constants.mapper.issueStatus as Json;
 const issuesPerPage = constants.number.issuesPerPage as number;
 
 const personId = props.personId ?? "0000000";
+const label = (() => {
+  switch (props.type) {
+    case "reply":
+      return {
+        icon: "reply",
+        text: "以下のメッセージへの返信アドバイスです",
+      };
+    case "other":
+      return {
+        icon: "chat_bubble",
+        text: "相談内容",
+      };
+    default:
+      return {
+        icon: "chat_bubble",
+        text: "相談内容",
+      };
+  }
+})();
 </script>
 
 <template>
@@ -44,8 +64,8 @@ const personId = props.personId ?? "0000000";
           </small>
         </div>
         <div class="row items-center q-gutter-x-sm q-pt-sm">
-          <q-icon name="chat_bubble" color="grey" />
-          <small>相手からのメッセージ</small>
+          <q-icon :name="label?.icon" color="grey" />
+          <small>{{ label?.text }}</small>
         </div>
         <small class="q-pl-lg q-pt-xs text-grey-8 ellipsis-2-lines">
           {{ message }}

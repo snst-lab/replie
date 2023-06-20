@@ -33,7 +33,7 @@ const drawerContents: {
     icon: "person",
     label: "返信先リスト",
     action: () => {
-      router.push("/persons/");
+      router.push(`/persons/`);
       if (!Screen.gt.sm) {
         isDrawerOpen.value = false;
       }

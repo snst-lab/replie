@@ -3,7 +3,6 @@ import { InputType } from '@nestjs/graphql';
 import { StringFilter } from '../prisma/string-filter.input';
 import { StringNullableFilter } from '../prisma/string-nullable-filter.input';
 import { DateTimeFilter } from '../prisma/date-time-filter.input';
-import { DateTimeNullableFilter } from '../prisma/date-time-nullable-filter.input';
 
 @InputType()
 export class PersonWhereInput {
@@ -46,7 +45,4 @@ export class PersonWhereInput {
 
     @Field(() => DateTimeFilter, {nullable:true})
     updatedAt?: DateTimeFilter;
-
-    @Field(() => DateTimeNullableFilter, {nullable:true})
-    deletedAt?: DateTimeNullableFilter;
 }

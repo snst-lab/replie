@@ -74,7 +74,7 @@ export class IssueResolver {
     @GuardResponse() { user, jwt }: Auth.GuardResponse,
   ) {
     try {
-      if (!args.data?.id) {
+      if (!args.data?.id || !args.data?.type) {
         this.error.throw('invalid-parameter');
       }
       let response = {} as Json;
@@ -83,34 +83,42 @@ export class IssueResolver {
           data: {
             ...args.data,
             id: tools.random.guid(),
-            requestMessage: tools.str.removeEmoji(args.data.requestMessage),
             userId: user.id,
+            requestMessage: tools.str.removeEmoji(args.data.requestMessage),
+            status: 'pending',
           },
         });
       } else {
         response = await this.prisma.issue.findFirst({
           where: { id: args.data.id },
         });
+        await this.prisma.issue.update({
+          where: { id: response.id },
+          data: {
+            status: 'pending',
+          },
+        });
       }
       if (!response?.id) {
         this.error.throw('not-found-issue');
       }
-      await this.prisma.issue.update({
-        where: { id: response.id },
-        data: {
-          status: 'pending',
-        },
-      });
 
-      const message = tools.prompt.issue(
-        response?.personRelationship ?? '',
-        response?.personCharacter ?? '',
-        response?.personRecentStatus ?? '',
-        response?.personRecentIntimacy ?? '',
-        response?.requestMessage ?? '',
-        response?.requestDirection ?? '',
-        response?.requestLimitLength ?? 0,
-      );
+      let message = '';
+      switch (args.data.type) {
+        case 'reply':
+          message = tools.prompt.reply(
+            response?.personRelationship ?? '',
+            response?.personCharacter ?? '',
+            response?.personRecentStatus ?? '',
+            response?.personRecentIntimacy ?? '',
+            response?.requestMessage ?? '',
+            response?.requestDirection ?? '',
+            response?.requestLimitLength ?? 0,
+          );
+          break;
+        default:
+          this.error.throw('invalid-parameter');
+      }
 
       const prisma = this.prisma;
 
@@ -135,7 +143,7 @@ export class IssueResolver {
                 userId: user.id,
                 personId: response.personId,
                 title: '新しいアドバイスが届きました',
-                message: `次のメッセージへのアドバイス「${response.requestMessage}」`,
+                message: `相談内容「${response.requestMessage}」`,
                 linkTo: `/issues/${response.id}`,
               },
             });
@@ -155,7 +163,7 @@ export class IssueResolver {
                 userId: user.id,
                 personId: response.personId,
                 title: 'アドバイスの作成に失敗しました',
-                message: `次のメッセージへのアドバイス「${response.requestMessage}」`,
+                message: `相談内容「${response.requestMessage}」`,
                 linkTo: `/issues/${response.id}`,
               },
             });

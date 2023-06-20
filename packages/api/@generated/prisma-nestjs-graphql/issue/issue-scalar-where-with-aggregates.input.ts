@@ -24,10 +24,19 @@ export class IssueScalarWhereWithAggregatesInput {
     userId?: StringWithAggregatesFilter;
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
+    type?: StringWithAggregatesFilter;
+
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
     status?: StringWithAggregatesFilter;
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     personId?: StringWithAggregatesFilter;
+
+    @Field(() => StringWithAggregatesFilter, {nullable:true})
+    personName?: StringWithAggregatesFilter;
+
+    @Field(() => StringNullableWithAggregatesFilter, {nullable:true})
+    personAvatar?: StringNullableWithAggregatesFilter;
 
     @Field(() => StringWithAggregatesFilter, {nullable:true})
     personRelationship?: StringWithAggregatesFilter;

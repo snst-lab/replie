@@ -35,8 +35,5 @@ export class PersonCountAggregateInput {
     updatedAt?: true;
 
     @Field(() => Boolean, {nullable:true})
-    deletedAt?: true;
-
-    @Field(() => Boolean, {nullable:true})
     _all?: true;
 }

@@ -12,10 +12,19 @@ export class IssueCreateManyInput {
     userId?: string;
 
     @Field(() => String, {nullable:true})
+    type?: string;
+
+    @Field(() => String, {nullable:true})
     status?: string;
 
     @Field(() => String, {nullable:true})
     personId?: string;
+
+    @Field(() => String, {nullable:true})
+    personName?: string;
+
+    @Field(() => String, {nullable:true})
+    personAvatar?: string;
 
     @Field(() => String, {nullable:true})
     personRelationship?: string;

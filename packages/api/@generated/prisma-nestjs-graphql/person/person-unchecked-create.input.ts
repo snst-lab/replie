@@ -33,7 +33,4 @@ export class PersonUncheckedCreateInput {
 
     @Field(() => Date, {nullable:true})
     updatedAt?: Date | string;
-
-    @Field(() => Date, {nullable:true})
-    deletedAt?: Date | string;
 }

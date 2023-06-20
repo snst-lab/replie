@@ -3,8 +3,11 @@ import { registerEnumType } from '@nestjs/graphql';
 export enum IssueScalarFieldEnum {
     id = "id",
     userId = "userId",
+    type = "type",
     status = "status",
     personId = "personId",
+    personName = "personName",
+    personAvatar = "personAvatar",
     personRelationship = "personRelationship",
     personCharacter = "personCharacter",
     personRecentStatus = "personRecentStatus",

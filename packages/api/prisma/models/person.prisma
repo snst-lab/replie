@@ -18,7 +18,6 @@ model Person {
    /// @Validator.IsNotEmpty()
    recentIntimacy String? @default("")
 
-   createdAt DateTime  @default(now()) @db.Timestamp
-   updatedAt DateTime  @default(now()) @db.Timestamp
-   deletedAt DateTime? @db.Timestamp
+   createdAt DateTime @default(now()) @db.Timestamp
+   updatedAt DateTime @default(now()) @db.Timestamp
 }

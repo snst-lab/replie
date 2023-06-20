@@ -12,10 +12,19 @@ export class IssueMinOrderByAggregateInput {
     userId?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
+    type?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
     status?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     personId?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    personName?: keyof typeof SortOrder;
+
+    @Field(() => SortOrder, {nullable:true})
+    personAvatar?: keyof typeof SortOrder;
 
     @Field(() => SortOrder, {nullable:true})
     personRelationship?: keyof typeof SortOrder;

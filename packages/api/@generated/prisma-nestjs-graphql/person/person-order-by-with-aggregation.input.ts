@@ -38,9 +38,6 @@ export class PersonOrderByWithAggregationInput {
     @Field(() => SortOrder, {nullable:true})
     updatedAt?: keyof typeof SortOrder;
 
-    @Field(() => SortOrder, {nullable:true})
-    deletedAt?: keyof typeof SortOrder;
-
     @Field(() => PersonCountOrderByAggregateInput, {nullable:true})
     _count?: PersonCountOrderByAggregateInput;
 

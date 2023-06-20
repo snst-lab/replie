@@ -36,8 +36,5 @@ export class PersonCountAggregate {
     updatedAt!: number;
 
     @Field(() => Int, {nullable:false})
-    deletedAt!: number;
-
-    @Field(() => Int, {nullable:false})
     _all!: number;
 }

@@ -2,6 +2,7 @@ import { $dto } from "@stores";
 import { defineStore } from "pinia";
 
 const primitive = {
+  type: "other",
   message: "",
   direction: "",
   limitLength: undefined,
@@ -42,12 +43,15 @@ export const useDtoRequestStore = defineStore("dtoRequest", {
     },
     async send(personId: Dto.Id) {
       const {
+        name: personName,
         relationship: personRelationship,
+        avatar: personAvatar,
         character: personCharacter,
         recentStatus: personRecentStatus,
         recentIntimacy: personRecentIntimacy,
       } = $dto().person.value[personId];
       const {
+        type,
         message: requestMessage,
         direction: requestDirection,
         limitLength: requestLimitLength,
@@ -55,8 +59,11 @@ export const useDtoRequestStore = defineStore("dtoRequest", {
       await useMutation("upsertIssue", {
         data: {
           id: "create",
+          type,
           personId,
+          personName,
           personRelationship,
+          personAvatar,
           personCharacter,
           personRecentStatus,
           personRecentIntimacy,

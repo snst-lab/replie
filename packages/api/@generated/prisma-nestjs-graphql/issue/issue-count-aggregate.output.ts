@@ -12,10 +12,19 @@ export class IssueCountAggregate {
     userId!: number;
 
     @Field(() => Int, {nullable:false})
+    type!: number;
+
+    @Field(() => Int, {nullable:false})
     status!: number;
 
     @Field(() => Int, {nullable:false})
     personId!: number;
+
+    @Field(() => Int, {nullable:false})
+    personName!: number;
+
+    @Field(() => Int, {nullable:false})
+    personAvatar!: number;
 
     @Field(() => Int, {nullable:false})
     personRelationship!: number;

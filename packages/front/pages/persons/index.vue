@@ -5,6 +5,7 @@ definePageMeta({
 });
 
 const router = useRouter();
+
 const personList = ref<Dto.Person[]>($dto().personList.init());
 
 onMounted(async () => {

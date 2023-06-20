@@ -22,14 +22,20 @@ model Issue {
    /// @Field(() => ID)
    /// @Validator.IsNotEmpty()
    /// @IsUUID("4")
-   id                   String  @id @default("")
+   id     String @id @default("")
    /// @IsUUID("4")
-   userId               String  @default("")
+   userId String @default("")
    /// @Validator.IsNotEmpty()
-   status               String  @default("pending")
+   type   String @default("other")
+   status String @default("pending")
+
    /// @Validator.IsNotEmpty()
    /// @IsUUID("4")
    personId             String  @default("")
+   /// @Validator.IsNotEmpty()
+   personName           String  @default("")
+   /// @Validator.IsNotEmpty()
+   personAvatar         String? @default("")
    /// @Validator.IsNotEmpty()
    personRelationship   String  @default("")
    /// @Validator.IsNotEmpty()
@@ -96,9 +102,8 @@ model Person {
    /// @Validator.IsNotEmpty()
    recentIntimacy String? @default("")
 
-   createdAt DateTime  @default(now()) @db.Timestamp
-   updatedAt DateTime  @default(now()) @db.Timestamp
-   deletedAt DateTime? @db.Timestamp
+   createdAt DateTime @default(now()) @db.Timestamp
+   updatedAt DateTime @default(now()) @db.Timestamp
 }
 
 

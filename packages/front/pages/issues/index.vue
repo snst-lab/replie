@@ -7,7 +7,6 @@ definePageMeta({
 const router = useRouter();
 
 const issueList = ref<Dto.Issue[]>($dto().issueList.init());
-const personList = ref<Dto.Person[]>($dto().personList.init());
 
 onMounted(async () => {
   issueList.value = await $dto().issueList.fetch();
@@ -26,8 +25,10 @@ const onEvent = {
     <template v-if="issueList.length">
       <CardIssue
         v-for="e in issueList"
+        :type="e.type"
         :personId="e.personId"
-        :personName="personList.find((p) => p.id === e.personId)?.name ?? ''"
+        :personName="e.personName"
+        :personAvatar="e.personAvatar"
         :status="e.status"
         :datetime="e.createdAt"
         :message="e.requestMessage"

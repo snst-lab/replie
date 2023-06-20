@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { VNodeRef } from "vue";
 import { $dto } from "@stores";
-import { tools } from "@tools";
 definePageMeta({
   layout: "dashboard",
 });
@@ -16,10 +15,11 @@ const request = ref<Dto.Request>($dto().request.init(personId.value));
 
 onMounted(async () => {
   if (!personId.value) {
-    router.replace("/persons/");
+    router.replace(`/persons/`);
   }
   person.value = await $dto().person.fetch(personId.value);
   request.value = await $dto().request.get(personId.value);
+  request.value.type = "reply";
 });
 
 const onEvent = {
@@ -37,15 +37,17 @@ const onEvent = {
 
 watch(
   [
+    () => request.value.type,
     () => request.value.message,
     () => request.value.direction,
     () => request.value.limitLength,
   ],
   async (value) => {
     $dto().request.set(personId.value, {
-      message: value[0],
-      direction: value[1],
-      limitLength: value[2],
+      type: value[0],
+      message: value[1],
+      direction: value[2],
+      limitLength: value[3],
     });
   }
 );
@@ -71,7 +73,7 @@ watch(
     <q-form class="q-px-md q-pt-sm" ref="form" lazy-validation>
       <Input
         :key="request.message + request.direction + request.limitLength"
-        :value="$dto().prompt.value(personId).length.toLocaleString()"
+        :value="$dto().prompt.reply(personId).length.toLocaleString()"
         label="ChatGPTへの命令文文字数"
         unit="文字 / 2,000文字"
         type="static"

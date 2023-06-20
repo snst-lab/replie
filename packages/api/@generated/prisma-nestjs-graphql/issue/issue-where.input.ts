@@ -24,10 +24,19 @@ export class IssueWhereInput {
     userId?: StringFilter;
 
     @Field(() => StringFilter, {nullable:true})
+    type?: StringFilter;
+
+    @Field(() => StringFilter, {nullable:true})
     status?: StringFilter;
 
     @Field(() => StringFilter, {nullable:true})
     personId?: StringFilter;
+
+    @Field(() => StringFilter, {nullable:true})
+    personName?: StringFilter;
+
+    @Field(() => StringNullableFilter, {nullable:true})
+    personAvatar?: StringNullableFilter;
 
     @Field(() => StringFilter, {nullable:true})
     personRelationship?: StringFilter;

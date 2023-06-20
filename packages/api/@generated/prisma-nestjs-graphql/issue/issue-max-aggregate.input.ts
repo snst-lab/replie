@@ -11,10 +11,19 @@ export class IssueMaxAggregateInput {
     userId?: true;
 
     @Field(() => Boolean, {nullable:true})
+    type?: true;
+
+    @Field(() => Boolean, {nullable:true})
     status?: true;
 
     @Field(() => Boolean, {nullable:true})
     personId?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    personName?: true;
+
+    @Field(() => Boolean, {nullable:true})
+    personAvatar?: true;
 
     @Field(() => Boolean, {nullable:true})
     personRelationship?: true;

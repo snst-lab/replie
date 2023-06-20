@@ -33,7 +33,4 @@ export class PersonMinAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     updatedAt?: true;
-
-    @Field(() => Boolean, {nullable:true})
-    deletedAt?: true;
 }

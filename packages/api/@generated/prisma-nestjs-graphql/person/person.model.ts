@@ -34,7 +34,4 @@ export class Person {
 
     @Field(() => Date, {nullable:false})
     updatedAt!: Date;
-
-    @Field(() => Date, {nullable:true})
-    deletedAt!: Date | null;
 }

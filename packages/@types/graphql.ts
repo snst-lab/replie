@@ -4,80 +4,75 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
+  ID: { input: string | number; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
   /** A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format. */
-  DateTime: any;
+  DateTime: { input: any; output: any; }
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
-  JSON: any;
+  JSON: { input: any; output: any; }
 };
 
 export type BoolFilter = {
-  equals?: InputMaybe<Scalars['Boolean']>;
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
   not?: InputMaybe<NestedBoolFilter>;
 };
 
 export type DateTimeFilter = {
-  equals?: InputMaybe<Scalars['DateTime']>;
-  gt?: InputMaybe<Scalars['DateTime']>;
-  gte?: InputMaybe<Scalars['DateTime']>;
-  in?: InputMaybe<Array<Scalars['DateTime']>>;
-  lt?: InputMaybe<Scalars['DateTime']>;
-  lte?: InputMaybe<Scalars['DateTime']>;
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<Scalars['DateTime']['input']>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<NestedDateTimeFilter>;
-  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
-};
-
-export type DateTimeNullableFilter = {
-  equals?: InputMaybe<Scalars['DateTime']>;
-  gt?: InputMaybe<Scalars['DateTime']>;
-  gte?: InputMaybe<Scalars['DateTime']>;
-  in?: InputMaybe<Array<Scalars['DateTime']>>;
-  lt?: InputMaybe<Scalars['DateTime']>;
-  lte?: InputMaybe<Scalars['DateTime']>;
-  not?: InputMaybe<NestedDateTimeNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+  notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
 };
 
 export type IntNullableFilter = {
-  equals?: InputMaybe<Scalars['Int']>;
-  gt?: InputMaybe<Scalars['Int']>;
-  gte?: InputMaybe<Scalars['Int']>;
-  in?: InputMaybe<Array<Scalars['Int']>>;
-  lt?: InputMaybe<Scalars['Int']>;
-  lte?: InputMaybe<Scalars['Int']>;
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
   not?: InputMaybe<NestedIntNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['Int']>>;
+  notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
 export type IssueCreateInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  id?: InputMaybe<Scalars['String']>;
-  personCharacter?: InputMaybe<Scalars['String']>;
-  personId?: InputMaybe<Scalars['String']>;
-  personRecentIntimacy?: InputMaybe<Scalars['String']>;
-  personRecentStatus?: InputMaybe<Scalars['String']>;
-  personRelationship?: InputMaybe<Scalars['String']>;
-  requestDirection?: InputMaybe<Scalars['String']>;
-  requestLimitLength?: InputMaybe<Scalars['Int']>;
-  requestMessage?: InputMaybe<Scalars['String']>;
-  result?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']>;
-  userId?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  personAvatar?: InputMaybe<Scalars['String']['input']>;
+  personCharacter?: InputMaybe<Scalars['String']['input']>;
+  personId?: InputMaybe<Scalars['String']['input']>;
+  personName?: InputMaybe<Scalars['String']['input']>;
+  personRecentIntimacy?: InputMaybe<Scalars['String']['input']>;
+  personRecentStatus?: InputMaybe<Scalars['String']['input']>;
+  personRelationship?: InputMaybe<Scalars['String']['input']>;
+  requestDirection?: InputMaybe<Scalars['String']['input']>;
+  requestLimitLength?: InputMaybe<Scalars['Int']['input']>;
+  requestMessage?: InputMaybe<Scalars['String']['input']>;
+  result?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type IssueOrderByWithRelationInput = {
   createdAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
+  personAvatar?: InputMaybe<SortOrder>;
   personCharacter?: InputMaybe<SortOrder>;
   personId?: InputMaybe<SortOrder>;
+  personName?: InputMaybe<SortOrder>;
   personRecentIntimacy?: InputMaybe<SortOrder>;
   personRecentStatus?: InputMaybe<SortOrder>;
   personRelationship?: InputMaybe<SortOrder>;
@@ -93,8 +88,10 @@ export type IssueOrderByWithRelationInput = {
 export enum IssueScalarFieldEnum {
   CreatedAt = 'createdAt',
   Id = 'id',
+  PersonAvatar = 'personAvatar',
   PersonCharacter = 'personCharacter',
   PersonId = 'personId',
+  PersonName = 'personName',
   PersonRecentIntimacy = 'personRecentIntimacy',
   PersonRecentStatus = 'personRecentStatus',
   PersonRelationship = 'personRelationship',
@@ -113,8 +110,10 @@ export type IssueWhereInput = {
   OR?: InputMaybe<Array<IssueWhereInput>>;
   createdAt?: InputMaybe<DateTimeFilter>;
   id?: InputMaybe<StringFilter>;
+  personAvatar?: InputMaybe<StringNullableFilter>;
   personCharacter?: InputMaybe<StringNullableFilter>;
   personId?: InputMaybe<StringFilter>;
+  personName?: InputMaybe<StringFilter>;
   personRecentIntimacy?: InputMaybe<StringNullableFilter>;
   personRecentStatus?: InputMaybe<StringNullableFilter>;
   personRelationship?: InputMaybe<StringFilter>;
@@ -128,31 +127,33 @@ export type IssueWhereInput = {
 };
 
 export type IssueWhereUniqueInput = {
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
   /** . */
-  createIssue: Response;
+  deleteIssue: Response;
   /** . */
   login: Response;
   /** . */
   readNotification: Response;
   /** . */
+  upsertIssue: Response;
+  /** . */
   upsertPerson: Response;
 };
 
 
-export type MutationCreateIssueArgs = {
-  data: IssueCreateInput;
+export type MutationDeleteIssueArgs = {
+  where: IssueWhereUniqueInput;
 };
 
 
 export type MutationLoginArgs = {
-  authType: Scalars['String'];
-  secret?: InputMaybe<Scalars['String']>;
-  userName: Scalars['String'];
+  authType: Scalars['String']['input'];
+  secret?: InputMaybe<Scalars['String']['input']>;
+  userName: Scalars['String']['input'];
 };
 
 
@@ -161,86 +162,80 @@ export type MutationReadNotificationArgs = {
 };
 
 
+export type MutationUpsertIssueArgs = {
+  data: IssueCreateInput;
+};
+
+
 export type MutationUpsertPersonArgs = {
   data: PersonCreateInput;
 };
 
 export type NestedBoolFilter = {
-  equals?: InputMaybe<Scalars['Boolean']>;
+  equals?: InputMaybe<Scalars['Boolean']['input']>;
   not?: InputMaybe<NestedBoolFilter>;
 };
 
 export type NestedDateTimeFilter = {
-  equals?: InputMaybe<Scalars['DateTime']>;
-  gt?: InputMaybe<Scalars['DateTime']>;
-  gte?: InputMaybe<Scalars['DateTime']>;
-  in?: InputMaybe<Array<Scalars['DateTime']>>;
-  lt?: InputMaybe<Scalars['DateTime']>;
-  lte?: InputMaybe<Scalars['DateTime']>;
+  equals?: InputMaybe<Scalars['DateTime']['input']>;
+  gt?: InputMaybe<Scalars['DateTime']['input']>;
+  gte?: InputMaybe<Scalars['DateTime']['input']>;
+  in?: InputMaybe<Array<Scalars['DateTime']['input']>>;
+  lt?: InputMaybe<Scalars['DateTime']['input']>;
+  lte?: InputMaybe<Scalars['DateTime']['input']>;
   not?: InputMaybe<NestedDateTimeFilter>;
-  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
-};
-
-export type NestedDateTimeNullableFilter = {
-  equals?: InputMaybe<Scalars['DateTime']>;
-  gt?: InputMaybe<Scalars['DateTime']>;
-  gte?: InputMaybe<Scalars['DateTime']>;
-  in?: InputMaybe<Array<Scalars['DateTime']>>;
-  lt?: InputMaybe<Scalars['DateTime']>;
-  lte?: InputMaybe<Scalars['DateTime']>;
-  not?: InputMaybe<NestedDateTimeNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+  notIn?: InputMaybe<Array<Scalars['DateTime']['input']>>;
 };
 
 export type NestedIntNullableFilter = {
-  equals?: InputMaybe<Scalars['Int']>;
-  gt?: InputMaybe<Scalars['Int']>;
-  gte?: InputMaybe<Scalars['Int']>;
-  in?: InputMaybe<Array<Scalars['Int']>>;
-  lt?: InputMaybe<Scalars['Int']>;
-  lte?: InputMaybe<Scalars['Int']>;
+  equals?: InputMaybe<Scalars['Int']['input']>;
+  gt?: InputMaybe<Scalars['Int']['input']>;
+  gte?: InputMaybe<Scalars['Int']['input']>;
+  in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  lt?: InputMaybe<Scalars['Int']['input']>;
+  lte?: InputMaybe<Scalars['Int']['input']>;
   not?: InputMaybe<NestedIntNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['Int']>>;
+  notIn?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
 export type NestedStringFilter = {
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<NestedStringFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NestedStringNullableFilter = {
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<NestedStringNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NotificationCreateInput = {
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  id?: InputMaybe<Scalars['String']>;
-  linkTo?: InputMaybe<Scalars['String']>;
-  message?: InputMaybe<Scalars['String']>;
-  personId?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-  unread?: InputMaybe<Scalars['Boolean']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']>;
-  userId?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  linkTo?: InputMaybe<Scalars['String']['input']>;
+  message?: InputMaybe<Scalars['String']['input']>;
+  personId?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  unread?: InputMaybe<Scalars['Boolean']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NotificationOrderByWithRelationInput = {
@@ -283,28 +278,26 @@ export type NotificationWhereInput = {
 };
 
 export type NotificationWhereUniqueInput = {
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PersonCreateInput = {
-  avatar?: InputMaybe<Scalars['String']>;
-  character?: InputMaybe<Scalars['String']>;
-  createdAt?: InputMaybe<Scalars['DateTime']>;
-  deletedAt?: InputMaybe<Scalars['DateTime']>;
-  id?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  recentIntimacy?: InputMaybe<Scalars['String']>;
-  recentStatus?: InputMaybe<Scalars['String']>;
-  relationship?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['DateTime']>;
-  userId?: InputMaybe<Scalars['String']>;
+  avatar?: InputMaybe<Scalars['String']['input']>;
+  character?: InputMaybe<Scalars['String']['input']>;
+  createdAt?: InputMaybe<Scalars['DateTime']['input']>;
+  id?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  recentIntimacy?: InputMaybe<Scalars['String']['input']>;
+  recentStatus?: InputMaybe<Scalars['String']['input']>;
+  relationship?: InputMaybe<Scalars['String']['input']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']['input']>;
+  userId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PersonOrderByWithRelationInput = {
   avatar?: InputMaybe<SortOrder>;
   character?: InputMaybe<SortOrder>;
   createdAt?: InputMaybe<SortOrder>;
-  deletedAt?: InputMaybe<SortOrder>;
   id?: InputMaybe<SortOrder>;
   name?: InputMaybe<SortOrder>;
   recentIntimacy?: InputMaybe<SortOrder>;
@@ -318,7 +311,6 @@ export enum PersonScalarFieldEnum {
   Avatar = 'avatar',
   Character = 'character',
   CreatedAt = 'createdAt',
-  DeletedAt = 'deletedAt',
   Id = 'id',
   Name = 'name',
   RecentIntimacy = 'recentIntimacy',
@@ -335,7 +327,6 @@ export type PersonWhereInput = {
   avatar?: InputMaybe<StringNullableFilter>;
   character?: InputMaybe<StringNullableFilter>;
   createdAt?: InputMaybe<DateTimeFilter>;
-  deletedAt?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   recentIntimacy?: InputMaybe<StringNullableFilter>;
@@ -346,7 +337,7 @@ export type PersonWhereInput = {
 };
 
 export type PersonWhereUniqueInput = {
-  id?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
@@ -368,8 +359,8 @@ export type QueryFindIssueArgs = {
   cursor?: InputMaybe<IssueWhereUniqueInput>;
   distinct?: InputMaybe<Array<IssueScalarFieldEnum>>;
   orderBy?: InputMaybe<Array<IssueOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<IssueWhereInput>;
 };
 
@@ -378,8 +369,8 @@ export type QueryFindManyIssueArgs = {
   cursor?: InputMaybe<IssueWhereUniqueInput>;
   distinct?: InputMaybe<Array<IssueScalarFieldEnum>>;
   orderBy?: InputMaybe<Array<IssueOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<IssueWhereInput>;
 };
 
@@ -388,8 +379,8 @@ export type QueryFindManyNotificationArgs = {
   cursor?: InputMaybe<NotificationWhereUniqueInput>;
   distinct?: InputMaybe<Array<NotificationScalarFieldEnum>>;
   orderBy?: InputMaybe<Array<NotificationOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<NotificationWhereInput>;
 };
 
@@ -398,15 +389,15 @@ export type QueryFindPersonArgs = {
   cursor?: InputMaybe<PersonWhereUniqueInput>;
   distinct?: InputMaybe<Array<PersonScalarFieldEnum>>;
   orderBy?: InputMaybe<Array<PersonOrderByWithRelationInput>>;
-  skip?: InputMaybe<Scalars['Int']>;
-  take?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
   where?: InputMaybe<PersonWhereInput>;
 };
 
 export type Response = {
   __typename?: 'Response';
-  jwt?: Maybe<Scalars['JSON']>;
-  response?: Maybe<Scalars['JSON']>;
+  jwt?: Maybe<Scalars['JSON']['output']>;
+  response?: Maybe<Scalars['JSON']['output']>;
 };
 
 export enum SortOrder {
@@ -415,31 +406,31 @@ export enum SortOrder {
 }
 
 export type StringFilter = {
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<NestedStringFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type StringNullableFilter = {
-  contains?: InputMaybe<Scalars['String']>;
-  endsWith?: InputMaybe<Scalars['String']>;
-  equals?: InputMaybe<Scalars['String']>;
-  gt?: InputMaybe<Scalars['String']>;
-  gte?: InputMaybe<Scalars['String']>;
-  in?: InputMaybe<Array<Scalars['String']>>;
-  lt?: InputMaybe<Scalars['String']>;
-  lte?: InputMaybe<Scalars['String']>;
+  contains?: InputMaybe<Scalars['String']['input']>;
+  endsWith?: InputMaybe<Scalars['String']['input']>;
+  equals?: InputMaybe<Scalars['String']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
+  in?: InputMaybe<Array<Scalars['String']['input']>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
   not?: InputMaybe<NestedStringNullableFilter>;
-  notIn?: InputMaybe<Array<Scalars['String']>>;
-  startsWith?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<Scalars['String']['input']>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -509,25 +500,25 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
+
+
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   BoolFilter: BoolFilter;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']['output']>;
   DateTimeFilter: DateTimeFilter;
-  DateTimeNullableFilter: DateTimeNullableFilter;
-  Int: ResolverTypeWrapper<Scalars['Int']>;
+  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
   IntNullableFilter: IntNullableFilter;
   IssueCreateInput: IssueCreateInput;
   IssueOrderByWithRelationInput: IssueOrderByWithRelationInput;
   IssueScalarFieldEnum: IssueScalarFieldEnum;
   IssueWhereInput: IssueWhereInput;
   IssueWhereUniqueInput: IssueWhereUniqueInput;
-  JSON: ResolverTypeWrapper<Scalars['JSON']>;
+  JSON: ResolverTypeWrapper<Scalars['JSON']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   NestedBoolFilter: NestedBoolFilter;
   NestedDateTimeFilter: NestedDateTimeFilter;
-  NestedDateTimeNullableFilter: NestedDateTimeNullableFilter;
   NestedIntNullableFilter: NestedIntNullableFilter;
   NestedStringFilter: NestedStringFilter;
   NestedStringNullableFilter: NestedStringNullableFilter;
@@ -544,7 +535,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   Response: ResolverTypeWrapper<Response>;
   SortOrder: SortOrder;
-  String: ResolverTypeWrapper<Scalars['String']>;
+  String: ResolverTypeWrapper<Scalars['String']['output']>;
   StringFilter: StringFilter;
   StringNullableFilter: StringNullableFilter;
 };
@@ -552,21 +543,19 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   BoolFilter: BoolFilter;
-  Boolean: Scalars['Boolean'];
-  DateTime: Scalars['DateTime'];
+  Boolean: Scalars['Boolean']['output'];
+  DateTime: Scalars['DateTime']['output'];
   DateTimeFilter: DateTimeFilter;
-  DateTimeNullableFilter: DateTimeNullableFilter;
-  Int: Scalars['Int'];
+  Int: Scalars['Int']['output'];
   IntNullableFilter: IntNullableFilter;
   IssueCreateInput: IssueCreateInput;
   IssueOrderByWithRelationInput: IssueOrderByWithRelationInput;
   IssueWhereInput: IssueWhereInput;
   IssueWhereUniqueInput: IssueWhereUniqueInput;
-  JSON: Scalars['JSON'];
+  JSON: Scalars['JSON']['output'];
   Mutation: {};
   NestedBoolFilter: NestedBoolFilter;
   NestedDateTimeFilter: NestedDateTimeFilter;
-  NestedDateTimeNullableFilter: NestedDateTimeNullableFilter;
   NestedIntNullableFilter: NestedIntNullableFilter;
   NestedStringFilter: NestedStringFilter;
   NestedStringNullableFilter: NestedStringNullableFilter;
@@ -580,7 +569,7 @@ export type ResolversParentTypes = {
   PersonWhereUniqueInput: PersonWhereUniqueInput;
   Query: {};
   Response: Response;
-  String: Scalars['String'];
+  String: Scalars['String']['output'];
   StringFilter: StringFilter;
   StringNullableFilter: StringNullableFilter;
 };
@@ -594,9 +583,10 @@ export interface JsonScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  createIssue?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationCreateIssueArgs, 'data'>>;
+  deleteIssue?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationDeleteIssueArgs, 'where'>>;
   login?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'authType' | 'userName'>>;
   readNotification?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationReadNotificationArgs, 'data'>>;
+  upsertIssue?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationUpsertIssueArgs, 'data'>>;
   upsertPerson?: Resolver<ResolversTypes['Response'], ParentType, ContextType, RequireFields<MutationUpsertPersonArgs, 'data'>>;
 };
 

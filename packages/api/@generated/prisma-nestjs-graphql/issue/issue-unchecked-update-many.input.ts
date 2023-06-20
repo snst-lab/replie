@@ -15,10 +15,19 @@ export class IssueUncheckedUpdateManyInput {
     userId?: StringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    type?: StringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     status?: StringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     personId?: StringFieldUpdateOperationsInput;
+
+    @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
+    personName?: StringFieldUpdateOperationsInput;
+
+    @Field(() => NullableStringFieldUpdateOperationsInput, {nullable:true})
+    personAvatar?: NullableStringFieldUpdateOperationsInput;
 
     @Field(() => StringFieldUpdateOperationsInput, {nullable:true})
     personRelationship?: StringFieldUpdateOperationsInput;

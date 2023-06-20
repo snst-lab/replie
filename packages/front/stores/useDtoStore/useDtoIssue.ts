@@ -3,9 +3,12 @@ import { $dto } from "@stores";
 
 const primitive = {
   id: "",
+  type: "other",
   status: "pending",
   personId: "",
+  personName: "",
   personRelationship: "",
+  personAvatar: "",
   personCharacter: "",
   personRecentStatus: "",
   personRecentIntimacy: "",

@@ -10,8 +10,7 @@ export enum PersonScalarFieldEnum {
     recentStatus = "recentStatus",
     recentIntimacy = "recentIntimacy",
     createdAt = "createdAt",
-    updatedAt = "updatedAt",
-    deletedAt = "deletedAt"
+    updatedAt = "updatedAt"
 }
 
 

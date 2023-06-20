@@ -9,6 +9,8 @@ const router = useRouter();
 const route = useRoute();
 
 const form = ref<VNodeRef>({} as VNodeRef);
+
+const type = ref<string>((route.query.type as string) ?? "other");
 const personId = ref<Dto.Id>((route.params.personId as Dto.Id) ?? "create");
 const person = ref<Dto.Person>($dto().person.init(personId.value));
 const isCreate = ref<boolean>(personId.value === "create");
@@ -16,7 +18,7 @@ const isEnableLeave = ref<boolean>(true);
 
 onMounted(async () => {
   if (!personId.value) {
-    router.replace("/persons/");
+    router.replace(`/persons/`);
   }
   person.value = await $dto().person.fetch(personId.value);
 });
@@ -121,7 +123,7 @@ const onEvent = {
       </p>
     </template>
     <template v-else>
-      <TextTitle center :back="`/request/${personId}`"
+      <TextTitle center :back="`/request/${personId}/`"
         >相手の情報を編集する</TextTitle
       >
       <p class="q-pb-sm q-px-md">以下の相手の情報を編集できます</p>

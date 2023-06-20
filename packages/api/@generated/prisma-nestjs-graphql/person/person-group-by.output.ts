@@ -37,9 +37,6 @@ export class PersonGroupBy {
     @Field(() => Date, {nullable:false})
     updatedAt!: Date | string;
 
-    @Field(() => Date, {nullable:true})
-    deletedAt?: Date | string;
-
     @Field(() => PersonCountAggregate, {nullable:true})
     _count?: PersonCountAggregate;
 

@@ -17,10 +17,19 @@ export class IssueGroupBy {
     userId!: string;
 
     @Field(() => String, {nullable:false})
+    type!: string;
+
+    @Field(() => String, {nullable:false})
     status!: string;
 
     @Field(() => String, {nullable:false})
     personId!: string;
+
+    @Field(() => String, {nullable:false})
+    personName!: string;
+
+    @Field(() => String, {nullable:true})
+    personAvatar?: string;
 
     @Field(() => String, {nullable:false})
     personRelationship!: string;

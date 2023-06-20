@@ -12,11 +12,20 @@ export class Issue {
     @Field(() => String, {nullable:false,defaultValue:''})
     userId!: string;
 
+    @Field(() => String, {nullable:false,defaultValue:'other'})
+    type!: string;
+
     @Field(() => String, {nullable:false,defaultValue:'pending'})
     status!: string;
 
     @Field(() => String, {nullable:false,defaultValue:''})
     personId!: string;
+
+    @Field(() => String, {nullable:false,defaultValue:''})
+    personName!: string;
+
+    @Field(() => String, {nullable:true,defaultValue:''})
+    personAvatar!: string | null;
 
     @Field(() => String, {nullable:false,defaultValue:''})
     personRelationship!: string;

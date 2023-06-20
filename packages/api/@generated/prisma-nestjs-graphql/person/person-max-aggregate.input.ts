@@ -33,7 +33,4 @@ export class PersonMaxAggregateInput {
 
     @Field(() => Boolean, {nullable:true})
     updatedAt?: true;
-
-    @Field(() => Boolean, {nullable:true})
-    deletedAt?: true;
 }

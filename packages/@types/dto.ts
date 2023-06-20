@@ -24,6 +24,7 @@ class Schema {
   });
 
   static request = z.object({
+    type: z.enum(["reply", "other"]),
     message: z.string(),
     direction: z.string().max(50).optional(),
     limitLength: z.number().optional(),
@@ -31,8 +32,11 @@ class Schema {
 
   static issue = z.object({
     id: Schema.id,
+    type: z.enum(["reply", "other"]),
     status: z.enum(["pending", "done", "failed", "canceled", "deleted"]),
     personId: Schema.id,
+    personName: z.string(),
+    personAvatar: z.string().optional(),
     personRelationship: z.string(),
     personCharacter: z.string().optional(),
     personRecentStatus: z.string().optional(),

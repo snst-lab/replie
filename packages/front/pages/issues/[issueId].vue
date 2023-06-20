@@ -11,11 +11,9 @@ const { public: constants } = useRuntimeConfig();
 const issueStatus = constants.mapper.issueStatus as Json;
 const issueId = ref<Dto.Id>(route.params.issueId as Dto.Id);
 const issue = ref<Dto.Issue>($dto().issue.init(issueId.value));
-const person = ref<Dto.Person>($dto().person.init(issue.value.personId));
 
 onMounted(async () => {
   issue.value = await $dto().issue.fetch(issueId.value);
-  person.value = await $dto().person.fetch(issue.value.personId);
 });
 
 const onEvent = {
@@ -93,8 +91,8 @@ const onEvent = {
     >
     <CardPerson
       :id="issue.personId"
-      :name="person.name"
-      :avatar="person.avatar"
+      :name="issue.personName"
+      :avatar="issue.personAvatar"
       :relationship="issue.personRelationship"
       @click="onEvent.clickCard(issue.personId)"
     />

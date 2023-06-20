@@ -1,5 +1,5 @@
 export class ToolsPrompt {
-  issue = (
+  reply = (
     personRelationship: string,
     personCharacter?: string,
     personRecentStatus?: string,

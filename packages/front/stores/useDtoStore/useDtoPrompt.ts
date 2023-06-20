@@ -5,12 +5,12 @@ import { tools } from "@tools";
 export const useDtoPromptStore = defineStore("prompt", {
   state: () => ({}),
   getters: {
-    value() {
+    reply() {
       return (personId: Dto.Id) => {
         const person = $dto().person.value[personId];
         const request = $dto().request.value[personId];
 
-        return tools.prompt.issue(
+        return tools.prompt.reply(
           person?.relationship ?? "",
           person?.character ?? "",
           person?.recentStatus ?? "",

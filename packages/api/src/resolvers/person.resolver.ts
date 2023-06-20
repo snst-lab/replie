@@ -5,10 +5,8 @@ import { AuthGuard, GuardResponse } from '@/guards';
 import { Response } from '@/types';
 import { CreateOnePersonArgs } from '@generated/person/create-one-person.args';
 import { FindFirstPersonArgs } from '@generated/person/find-first-person.args';
+import { FindManyPersonArgs } from '@generated/person/find-many-person.args';
 import { tools } from '@tools';
-import { constants } from '@constants';
-
-const { personsPerPage } = constants.number;
 
 @Resolver()
 export class PersonResolver {
@@ -41,11 +39,16 @@ export class PersonResolver {
 
   @Query(() => Response, { description: '.' })
   @UseGuards(AuthGuard)
-  async findManyPerson(@GuardResponse() { user, jwt }: Auth.GuardResponse) {
+  async findManyPerson(
+    @Args() args: FindManyPersonArgs,
+    @GuardResponse() { user, jwt }: Auth.GuardResponse,
+  ) {
     try {
       const response = await this.prisma.person.findMany({
-        where: { userId: user.id },
-        // TODO: pagination
+        where: {
+          AND: [{ userId: user.id }, args.where],
+        },
+        orderBy: { updatedAt: 'desc' },
       });
       return { response, jwt };
     } catch (error) {
@@ -75,7 +78,7 @@ export class PersonResolver {
       } else {
         const found = await this.prisma.person.findFirst({
           where: {
-            AND: [{ id: args.data.id }, { userId: user.id }],
+            AND: [{ userId: user.id }, { id: args.data.id }],
           },
         });
         if (!found?.id) {

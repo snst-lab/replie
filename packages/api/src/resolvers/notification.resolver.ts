@@ -24,7 +24,6 @@ export class NotificationResolver {
   ) {
     try {
       const response = await this.prisma.notification.findMany({
-        ...args,
         where: { AND: [{ userId: user.id }, args.where] },
         take: notificationsPerPage,
         orderBy: { createdAt: 'desc' },
@@ -37,7 +36,7 @@ export class NotificationResolver {
 
   @Mutation(() => Response, { description: '.' })
   @UseGuards(AuthGuard)
-  async readNotification(
+  async markReadNotification(
     @Args() args: CreateOneNotificationArgs,
     @GuardResponse() { user, jwt }: Auth.GuardResponse,
   ) {

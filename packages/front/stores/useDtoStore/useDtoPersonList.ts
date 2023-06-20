@@ -21,7 +21,7 @@ export const useDtoPersonListStore = defineStore("dtoPersonList", {
         return [];
       }
     },
-    setOne(personId: Dto.Id, person: Dto.Person) {
+    set(personId: Dto.Id, person: Dto.Person) {
       const index = this.value.findIndex((e) => e.id === personId);
       if (index === -1) {
         this.value.push(person);
@@ -30,18 +30,17 @@ export const useDtoPersonListStore = defineStore("dtoPersonList", {
       }
       return [...this.value];
     },
-    clearOne(personId: Dto.Id) {
+    clear(personId: Dto.Id) {
       const index = this.value.findIndex((e) => e.id === personId);
       if (index !== -1) {
         this.value.splice(index, 1);
       }
       return [...this.value];
     },
-    set(persons: Dto.Person[]) {
-      this.value = persons;
-      return [...this.value];
+    setAll(persons: Dto.Person[]) {
+      this.value = [...persons];
     },
-    clear() {
+    clearAll() {
       this.value = [];
       return [];
     },
@@ -49,46 +48,11 @@ export const useDtoPersonListStore = defineStore("dtoPersonList", {
       if (this.value[0]) {
         return [...this.value];
       }
-      // const response = await [
-      //   {
-      //     id: "000000000001",
-      //     avatar: "",
-      //     name: "田中 花子",
-      //     relationship: "友だち",
-      //   },
-      //   {
-      //     id: "000000000002",
-      //     avatar: "",
-      //     name: "山田 聡太郎",
-      //     relationship: "取引先",
-      //   },
-      //   {
-      //     id: "000000000003",
-      //     avatar: "",
-      //     name: "佐藤 恵美子",
-      //     relationship: "後輩",
-      //   },
-      //   {
-      //     id: "000000000004",
-      //     avatar: "",
-      //     name: "鈴木 大輔",
-      //     relationship: "同級生",
-      //   },
-      //   {
-      //     id: "000000000005",
-      //     avatar: "",
-      //     name: "木村 翔太",
-      //     relationship: "同僚",
-      //   },
-      //   {
-      //     id: "000000000006",
-      //     avatar: "",
-      //     name: "宮田 真由美",
-      //     relationship: "親戚",
-      //   },
-      // ];
       const response = (await useQuery("findManyPerson")) as Dto.Person[];
-      return this.set(response ?? []);
+      if (response[0]) {
+        await this.setAll(response);
+      }
+      return [...this.value];
     },
   },
 });

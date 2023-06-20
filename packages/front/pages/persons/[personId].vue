@@ -9,8 +9,6 @@ const router = useRouter();
 const route = useRoute();
 
 const form = ref<VNodeRef>({} as VNodeRef);
-
-const type = ref<string>((route.query.type as string) ?? "other");
 const personId = ref<Dto.Id>((route.params.personId as Dto.Id) ?? "create");
 const person = ref<Dto.Person>($dto().person.init(personId.value));
 const isCreate = ref<boolean>(personId.value === "create");

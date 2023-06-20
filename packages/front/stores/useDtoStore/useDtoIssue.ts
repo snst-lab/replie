@@ -40,24 +40,20 @@ export const useDtoIssueStore = defineStore("dtoIssue", {
     },
     set(issueId: Dto.Id, issue: Partial<Dto.Issue>) {
       this.value[issueId] = { ...this.value[issueId], ...issue };
-      $dto().issueList.setOne(issueId, this.value[issueId]);
-      return { ...this.value[issueId] };
+      $dto().issueList.set(issueId, this.value[issueId]);
     },
     clear(issueId: Dto.Id) {
       this.value[issueId] = { ...primitive };
-      $dto().issueList.clearOne(issueId);
-      return { ...primitive };
+      $dto().issueList.clear(issueId);
     },
     async fetch(issueId: Dto.Id) {
-      // if (this.value[issueId]?.id) {
-      //   return { ...this.value[issueId], status, result };
-      // }
       const response = (await useQuery("findIssue", {
         where: {
           id: { equals: issueId },
         },
       })) as Dto.Issue;
-      return this.set(response.id, response ?? primitive);
+      await this.set(response.id, response);
+      return { ...this.value[issueId] };
     },
     async resend(issueId: Dto.Id) {
       const response = (await useMutation("upsertIssue", {

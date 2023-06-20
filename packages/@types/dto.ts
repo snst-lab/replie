@@ -5,12 +5,12 @@ class Schema {
 
   static notification = z.object({
     id: Schema.id,
-    createdAt: z.string().regex(/^\d{4}\/\d{2}\/\d{2}T\d{2}:\d{2}:\d{2}$/),
     unread: z.boolean(),
     title: z.string(),
     message: z.string(),
     personId: Schema.id.optional(),
     linkTo: z.string().optional(),
+    createdAt: z.string().regex(/^\d{4}\/\d{2}\/\d{2}T\d{2}:\d{2}:\d{2}$/),
   });
 
   static person = z.object({
@@ -44,8 +44,8 @@ class Schema {
     requestMessage: z.string(),
     requestDirection: z.string().optional(),
     requestLimitLength: z.number().optional(),
-    createdAt: z.string(),
     result: z.string(),
+    createdAt: z.string().regex(/^\d{4}\/\d{2}\/\d{2}T\d{2}:\d{2}:\d{2}$/),
   });
 }
 

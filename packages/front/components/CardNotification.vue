@@ -16,7 +16,7 @@ const randomSeed = props.data.personId ?? dayjs().unix().toString();
 const onEvent = {
   clickCard: () => {
     if (props.data.unread) {
-      $notification().read(props.data.id);
+      $notification().markRead(props.data.id);
     }
     if (props.data.linkTo) {
       router.push(props.data.linkTo);

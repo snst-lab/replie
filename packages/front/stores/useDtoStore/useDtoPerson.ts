@@ -32,13 +32,11 @@ export const useDtoPersonStore = defineStore("dtoPerson", {
     },
     set(personId: Dto.Id, person: Partial<Dto.Person>) {
       this.value[personId] = { ...this.value[personId], ...person };
-      $dto().personList.setOne(personId, this.value[personId]);
-      return { ...this.value[personId] };
+      $dto().personList.set(personId, this.value[personId]);
     },
     clear(personId: Dto.Id) {
       this.value[personId] = { ...primitive };
-      $dto().personList.clearOne(personId);
-      return { ...this.value[personId] };
+      $dto().personList.clear(personId);
     },
     async fetch(personId: Dto.Id) {
       if (this.value[personId]?.name) {
@@ -53,7 +51,8 @@ export const useDtoPersonStore = defineStore("dtoPerson", {
       if (!response?.id) {
         return { ...primitive };
       }
-      return this.set(response.id, response ?? primitive);
+      await this.set(response.id, response);
+      return { ...this.value[personId] };
     },
     async update(personId: Dto.Id, person: Dto.Person) {
       const response = (await useMutation("upsertPerson", {
@@ -62,7 +61,8 @@ export const useDtoPersonStore = defineStore("dtoPerson", {
       if (!response?.id) {
         return { ...primitive };
       }
-      return this.set(response.id, response);
+      await this.set(response.id, response);
+      return { ...this.value[personId] };
     },
   },
 });

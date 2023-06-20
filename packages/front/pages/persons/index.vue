@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { $dto } from "@stores";
+import { tools } from "@tools";
 definePageMeta({
   layout: "dashboard",
 });
@@ -11,7 +12,7 @@ const personList = ref<Dto.Person[]>($dto().personList.init());
 onMounted(async () => {
   personList.value = await $dto().personList.fetch();
   personList.value = personList.value.filter((e) => e.id !== "create");
-  if (!personList.value.length) {
+  if (!personList.value[0]) {
     router.replace("/persons/create/");
   }
 });
@@ -28,7 +29,7 @@ const onEvent = {
 
 <template>
   <div class="p-persons q-pb-xl">
-    <template v-if="personList.length">
+    <template v-if="personList[0]">
       <TextTitle center back="/">誰への返信をしますか</TextTitle>
       <p class="q-pb-sm q-px-md">返信先の相手を選んでください。</p>
       <CardPerson
@@ -48,7 +49,6 @@ const onEvent = {
         右下の「+」ボタンから新しい相手を登録してください 。
       </p>
     </template>
-
     <q-btn
       round
       color="primary"

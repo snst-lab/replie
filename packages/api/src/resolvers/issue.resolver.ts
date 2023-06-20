@@ -56,10 +56,9 @@ export class IssueResolver {
   ) {
     try {
       const response = await this.prisma.issue.findMany({
-        where: { userId: user.id },
+        where: { AND: [{ userId: user.id }, args.where] },
         take: issuesPerPage,
-        skip: args?.skip ?? 0,
-        orderBy: { updatedAt: 'desc' },
+        orderBy: { createdAt: 'desc' },
       });
       return { response, jwt };
     } catch (error) {

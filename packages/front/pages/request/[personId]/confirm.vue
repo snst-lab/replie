@@ -8,7 +8,6 @@ definePageMeta({
 const router = useRouter();
 const route = useRoute();
 
-const type = ref<string>((route.query.type as string) ?? "other");
 const personId = ref<Dto.Id>(route.params.personId as string);
 const person = ref<Dto.Person>($dto().person.init(personId.value));
 const request = ref<Dto.Request>($dto().request.init(personId.value));

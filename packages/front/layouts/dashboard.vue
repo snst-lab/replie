@@ -267,6 +267,8 @@ const onEvent = {
           <slot />
         </q-page>
       </q-page-container>
+
+      <q-footer></q-footer>
     </q-layout>
   </div>
 </template>

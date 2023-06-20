@@ -56,25 +56,16 @@ const useNotificationStore = defineStore("notification", {
     pushHistory(notifications: Dto.Notification[]) {
       this.history.push(...notifications);
     },
-    async read(notificationId: string) {
-      const response = (await useMutation("readNotification", {
-        data: { id: notificationId },
-      })) as Dto.Notification;
-      const index = this.history.findIndex((item) => item.id === response.id);
-      if (index !== -1) {
-        this.history[index].unread = false;
-      }
-    },
     async fetchNew() {
       const response = (await useQuery(
         "findManyNotification",
-        this.history.length > 0
+        this.history[0]
           ? {
               where: { createdAt: { gt: this.newestTimestamp } },
             }
           : {}
       )) as Dto.Notification[];
-      if (response.length > 0) {
+      if (response[0]) {
         await this.unshiftHistory(response);
         if (this.unreadCount > 0) {
           await tools.sleep(500);
@@ -84,17 +75,17 @@ const useNotificationStore = defineStore("notification", {
       return [...this.history];
     },
     async fetchPast() {
-      if (this.history.length < 5) {
+      const { public: constants } = useRuntimeConfig();
+      const { notificationsPerPage } = constants.number;
+      if (this.history.length < notificationsPerPage) {
         return [];
       }
       const response = (await useQuery("findManyNotification", {
         where: { createdAt: { lt: this.oldestTimestamp } },
       })) as Dto.Notification[];
-      if (response.length > 0) {
+      if (response[0]) {
         await this.pushHistory(response);
       } else {
-        const { public: constants } = useRuntimeConfig();
-        const { notificationsPerPage } = constants.number;
         window.scrollBy({
           top: -(1 / notificationsPerPage) * window.innerHeight,
           behavior: "smooth",
@@ -102,10 +93,19 @@ const useNotificationStore = defineStore("notification", {
       }
       return [...this.history];
     },
+    async markRead(notificationId: string) {
+      const response = (await useMutation("markReadNotification", {
+        data: { id: notificationId },
+      })) as Dto.Notification;
+      const index = this.history.findIndex((item) => item.id === response.id);
+      if (index !== -1) {
+        this.history[index].unread = false;
+      }
+    },
     pollingStart() {
       this.polling = setInterval(async () => {
         await this.fetchNew();
-      }, 10000);
+      }, 20000);
     },
     pollingStop() {
       clearInterval(this.polling);
